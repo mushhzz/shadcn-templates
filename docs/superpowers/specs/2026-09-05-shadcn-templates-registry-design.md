@@ -29,24 +29,24 @@ static host for the built registry JSON.
 ```
 shadcn-templates/
 ├── registry.json              # source of truth for every registry item
-├── registry/
-│   ├── blocks/                # shared composed pieces (one folder per block)
-│   ├── dashboard/             # template: pages/, components/, data/
-│   ├── chat/
-│   ├── crm/
-│   └── agent/
-├── components/ui/             # shadcn primitives (CLI-managed), used by preview
+├── components/
+│   ├── ui/                    # shadcn primitives (CLI-managed)
+│   ├── blocks/                # shared composed pieces, one file per block
+│   └── <template>/            # template-specific components
 ├── app/
 │   ├── (site)/                # gallery: template cards, install command, block demos
-│   └── (preview)/             # mounts each template's pages for live demo
-├── lib/                       # utils, preview-only helpers
+│   └── (preview)/<template>/  # template pages (registry:page sources), live demo
+├── lib/
+│   ├── utils.ts, site.ts      # cn(), registry constants
+│   └── <template>/            # template fixtures (registry:lib sources)
 ├── scripts/                   # registry integrity check, install smoke test
 └── public/r/                  # `shadcn build` output
 ```
 
-Registry source files must import via the standard aliases
-(`@/components/ui/...`, `@/registry/...`, `@/lib/utils`) so the shadcn CLI
-can rewrite them to the consumer's configured aliases on install.
+Registry source lives at real alias paths so the CLI's import rewriting maps
+1:1 into the consumer project. Source files import only via the standard
+aliases (`@/components/ui/...`, `@/components/blocks/...`, `@/lib/...`) so the
+shadcn CLI can rewrite them to the consumer's configured aliases on install.
 
 ## Registry item graph
 
