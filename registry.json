@@ -73,6 +73,49 @@
           "target": "components/blocks/chart-card.tsx"
         }
       ]
+    },
+    {
+      "name": "theme-provider",
+      "type": "registry:block",
+      "title": "Theme Provider",
+      "description": "next-themes provider for class-based dark mode, with a keyboard hotkey to toggle.",
+      "dependencies": [
+        "next-themes"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/theme-provider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:block",
+      "title": "App Shell",
+      "description": "Collapsible sidebar, header with breadcrumbs, user menu and theme toggle. Pass a nav config.",
+      "dependencies": [
+        "lucide-react",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "sidebar",
+        "breadcrumb",
+        "button",
+        "dropdown-menu",
+        "avatar",
+        "separator",
+        "tooltip",
+        "@kit/theme-provider"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/app-shell.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/app-shell.tsx"
+        }
+      ]
     }
   ]
 }

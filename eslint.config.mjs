@@ -12,7 +12,16 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // shadcn build output
+    "public/r/**",
   ]),
+  // CLI-managed shadcn source: don't fail lint on upstream patterns.
+  {
+    files: ["components/ui/**", "hooks/**"],
+    rules: {
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
