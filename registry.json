@@ -2,5 +2,35 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "kit",
   "homepage": "https://shadcn-templates.vercel.app",
-  "items": []
+  "items": [
+    {
+      "name": "page-header",
+      "type": "registry:block",
+      "title": "Page Header",
+      "description": "Title, description and an actions slot for the top of a page.",
+      "files": [
+        {
+          "path": "components/blocks/page-header.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/page-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:block",
+      "title": "Empty State",
+      "description": "Icon, message and primary action for empty lists.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/empty-state.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/empty-state.tsx"
+        }
+      ]
+    }
+  ]
 }
