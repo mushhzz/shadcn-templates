@@ -5,7 +5,9 @@ import { AppShell } from "@/components/blocks/app-shell"
 
 export function AppShellDemo() {
   return (
-    <div className="h-[420px] overflow-hidden rounded-md border">
+    // The sidebar panel is position:fixed. A transform makes the demo box its
+    // containing block so it stays inside the gallery instead of the viewport.
+    <div className="relative h-[420px] overflow-hidden rounded-md border [transform:translateZ(0)] [&_[data-slot=sidebar-inset]]:min-h-0">
       <AppShell
         brand={{ name: "Acme", href: "#" }}
         nav={[
