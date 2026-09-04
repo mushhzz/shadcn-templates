@@ -79,7 +79,7 @@ shadcn-templates/
 **Interfaces:**
 - Produces: `lib/utils.ts` exporting `cn(...inputs: ClassValue[]): string`; `components.json` with aliases `@/components`, `@/components/ui`, `@/lib`, `@/hooks`, `@/lib/utils`.
 
-- [ ] **Step 1: Generate the project in a sibling temp folder**
+- [x] **Step 1: Generate the project in a sibling temp folder**
 
 The repo already contains `.git` and `docs/`. The CLI creates a new directory, so generate beside it and merge.
 
@@ -90,7 +90,7 @@ npx shadcn@latest init -t next -b radix -y -n shadcn-templates-gen
 
 If prompted for a preset, choose the default (Nova). If prompted for package manager, choose pnpm.
 
-- [ ] **Step 2: Merge into the repo and remove the temp folder**
+- [x] **Step 2: Merge into the repo and remove the temp folder**
 
 ```bash
 rsync -a --exclude .git shadcn-templates-gen/ shadcn-templates/
@@ -99,17 +99,17 @@ cd shadcn-templates
 pnpm install
 ```
 
-- [ ] **Step 3: Verify the generated config uses standard aliases**
+- [x] **Step 3: Verify the generated config uses standard aliases**
 
 Run: `cat components.json`
 Expected: `aliases.components` is `@/components`, `aliases.ui` is `@/components/ui`, `aliases.utils` is `@/lib/utils`, `aliases.lib` is `@/lib`, `aliases.hooks` is `@/hooks`. If the CLI generated `src/` paths, re-run Step 1 answering "no" to a `src/` directory; this plan assumes no `src/`.
 
-- [ ] **Step 4: Verify dev build works**
+- [x] **Step 4: Verify dev build works**
 
 Run: `pnpm build`
 Expected: succeeds, prints route table containing `/`.
 
-- [ ] **Step 5: Ignore registry output**
+- [x] **Step 5: Ignore registry output**
 
 Append to `.gitignore`:
 
@@ -118,7 +118,7 @@ Append to `.gitignore`:
 /public/r/
 ```
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -136,13 +136,13 @@ git commit -m "chore: scaffold Next.js 16 app with shadcn (radix base)"
 **Interfaces:**
 - Produces: `pnpm test` runs all `*.test.ts(x)` under jsdom with `@/` aliases resolved and `window.matchMedia` mocked.
 
-- [ ] **Step 1: Install dev dependencies**
+- [x] **Step 1: Install dev dependencies**
 
 ```bash
 pnpm add -D vitest@^5 @vitejs/plugin-react@^6 jsdom@^30 @testing-library/react@^16 @testing-library/jest-dom@^6 @testing-library/user-event@^14 vite-tsconfig-paths@^5 tsx@^4
 ```
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 `lib/__tests__/utils.test.ts`:
 
@@ -157,12 +157,12 @@ describe("cn", () => {
 })
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `pnpm vitest run`
 Expected: fails because no config exists (alias unresolved or "No test files found" / environment error).
 
-- [ ] **Step 4: Add config and setup**
+- [x] **Step 4: Add config and setup**
 
 `vitest.config.ts`:
 
@@ -225,12 +225,12 @@ Add scripts to `package.json`:
 "typecheck": "tsc --noEmit"
 ```
 
-- [ ] **Step 5: Run to verify it passes**
+- [x] **Step 5: Run to verify it passes**
 
 Run: `pnpm test`
 Expected: 1 passed.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -248,7 +248,7 @@ git commit -m "test: add vitest + testing-library setup"
 **Interfaces:**
 - Produces: `registry.json` root `{ $schema, name: "kit", homepage, items: [] }`; `checkRegistry(registry, opts): string[]` returning error strings (empty means valid); `pnpm registry:build` and `pnpm registry:check` scripts; `lib/site.ts` exporting `REGISTRY_NAMESPACE = "@kit"` and `REGISTRY_URL`.
 
-- [ ] **Step 1: Create the empty registry and site constants**
+- [x] **Step 1: Create the empty registry and site constants**
 
 `registry.json`:
 
@@ -274,7 +274,7 @@ export function installCommand(itemName: string) {
 }
 ```
 
-- [ ] **Step 2: Write the failing integrity test**
+- [x] **Step 2: Write the failing integrity test**
 
 `scripts/check-registry.test.ts`:
 
@@ -378,12 +378,12 @@ describe("checkRegistry", () => {
 })
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `pnpm vitest run scripts`
 Expected: FAIL, cannot resolve `./check-registry`.
 
-- [ ] **Step 4: Implement the checker**
+- [x] **Step 4: Implement the checker**
 
 `scripts/check-registry.ts`:
 
@@ -476,12 +476,12 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
 }
 ```
 
-- [ ] **Step 5: Run to verify tests pass**
+- [x] **Step 5: Run to verify tests pass**
 
 Run: `pnpm vitest run scripts`
 Expected: 6 passed.
 
-- [ ] **Step 6: Add scripts and confirm `shadcn build` runs on the empty registry**
+- [x] **Step 6: Add scripts and confirm `shadcn build` runs on the empty registry**
 
 Add to `package.json` scripts:
 
@@ -494,7 +494,7 @@ Add to `package.json` scripts:
 Run: `pnpm registry:check && pnpm registry:build && ls public/r`
 Expected: `registry ok: 0 items`, then `public/r/` exists (possibly containing only `registry.json`).
 
-- [ ] **Step 7: Update the spec's repository shape**
+- [x] **Step 7: Update the spec's repository shape**
 
 In the spec, replace the `registry/` tree entries with:
 
@@ -509,7 +509,7 @@ In the spec, replace the `registry/` tree entries with:
 
 and add one sentence under "Repository shape": "Registry source lives at real alias paths so the CLI's import rewriting maps 1:1 into the consumer project."
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add -A
@@ -527,18 +527,18 @@ git commit -m "feat: registry skeleton with integrity checker"
 **Interfaces:**
 - Produces: primitives `button card badge separator avatar input textarea label select checkbox switch tabs table sheet dialog dropdown-menu popover command tooltip skeleton scroll-area collapsible breadcrumb sidebar chart` under `@/components/ui/*`, plus `@/hooks/use-mobile`.
 
-- [ ] **Step 1: Add primitives**
+- [x] **Step 1: Add primitives**
 
 ```bash
 npx shadcn@latest add -y button card badge separator avatar input textarea label select checkbox switch tabs table sheet dialog dropdown-menu popover command tooltip skeleton scroll-area collapsible breadcrumb sidebar chart
 ```
 
-- [ ] **Step 2: Verify types and build**
+- [x] **Step 2: Verify types and build**
 
 Run: `pnpm typecheck && pnpm build`
 Expected: both succeed.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add -A
@@ -560,7 +560,7 @@ git commit -m "feat: add shadcn primitives used by shared blocks"
   export function PageHeader(props: PageHeaderProps): JSX.Element
   ```
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/blocks/__tests__/page-header.test.tsx`:
 
@@ -586,12 +586,12 @@ describe("PageHeader", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/page-header.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/blocks/page-header.tsx`:
 
@@ -626,12 +626,12 @@ export function PageHeader({ title, description, actions, className }: PageHeade
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/page-header.test.tsx`
 Expected: 2 passed.
 
-- [ ] **Step 5: Register the item**
+- [x] **Step 5: Register the item**
 
 Add to `registry.json` `items`:
 
@@ -648,7 +648,7 @@ Add to `registry.json` `items`:
 Run: `pnpm registry:check`
 Expected: `registry ok: 1 items`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -670,7 +670,7 @@ git commit -m "feat(blocks): add page-header"
   export function EmptyState(props: EmptyStateProps): JSX.Element
   ```
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/blocks/__tests__/empty-state.test.tsx`:
 
@@ -698,12 +698,12 @@ describe("EmptyState", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/empty-state.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/blocks/empty-state.tsx`:
 
@@ -741,12 +741,12 @@ export function EmptyState({ icon: Icon, title, description, action, className }
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/empty-state.test.tsx`
 Expected: 2 passed.
 
-- [ ] **Step 5: Register the item**
+- [x] **Step 5: Register the item**
 
 Add to `registry.json` `items`:
 
@@ -764,7 +764,7 @@ Add to `registry.json` `items`:
 Run: `pnpm registry:check`
 Expected: `registry ok: 2 items`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -787,7 +787,7 @@ git commit -m "feat(blocks): add empty-state"
   export function formatDelta(delta: number): string   // "+12.5%" | "-3.0%" | "0.0%"
   ```
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/blocks/__tests__/stat-card.test.tsx`:
 
@@ -827,12 +827,12 @@ describe("StatCard", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/stat-card.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/blocks/stat-card.tsx`:
 
@@ -906,12 +906,12 @@ export function StatCard({ label, value, delta, deltaLabel, sparkline, className
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/stat-card.test.tsx`
 Expected: 4 passed. If Recharts logs width/height warnings, that is fine.
 
-- [ ] **Step 5: Register the item**
+- [x] **Step 5: Register the item**
 
 Add to `registry.json` `items`:
 
@@ -930,7 +930,7 @@ Add to `registry.json` `items`:
 Run: `pnpm registry:check`
 Expected: `registry ok: 3 items`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -954,7 +954,7 @@ git commit -m "feat(blocks): add stat-card"
   ```
   `children` is a single Recharts chart element rendered inside `ChartContainer`.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/blocks/__tests__/chart-card.test.tsx`:
 
@@ -1000,12 +1000,12 @@ describe("ChartCard", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/chart-card.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/blocks/chart-card.tsx`:
 
@@ -1072,12 +1072,12 @@ export function ChartCard({
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/chart-card.test.tsx`
 Expected: 2 passed.
 
-- [ ] **Step 5: Register the item**
+- [x] **Step 5: Register the item**
 
 ```json
 {
@@ -1094,7 +1094,7 @@ Expected: 2 passed.
 Run: `pnpm registry:check`
 Expected: `registry ok: 4 items`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -1129,7 +1129,7 @@ git commit -m "feat(blocks): add chart-card"
   ```
   `currentPath` marks the active nav item; templates pass `usePathname()`.
 
-- [ ] **Step 1: Install next-themes and wrap the root layout**
+- [x] **Step 1: Install next-themes and wrap the root layout**
 
 ```bash
 pnpm add next-themes
@@ -1154,7 +1154,7 @@ export function ThemeProvider({ children, ...props }: React.ComponentProps<typeo
 
 In `app/layout.tsx`, add `suppressHydrationWarning` to `<html>` and wrap `{children}` in `<ThemeProvider>` imported from `@/components/blocks/theme-provider`.
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 `components/blocks/__tests__/app-shell.test.tsx`:
 
@@ -1217,12 +1217,12 @@ describe("AppShell", () => {
 })
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/app-shell.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 `components/blocks/app-shell.tsx`:
 
@@ -1433,12 +1433,12 @@ export { Badge as NavBadge }
 
 Remove the final `export { Badge as NavBadge }` line and the `Badge` import if unused after implementation; they exist only so the import list above compiles if you keep it. Prefer removing both.
 
-- [ ] **Step 5: Run to verify it passes**
+- [x] **Step 5: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/app-shell.test.tsx`
 Expected: 3 passed. If the active-state assertion fails, inspect the rendered `SidebarMenuButton`: shadcn renders `data-active="true|false"` on the button, and `asChild` moves it onto the `<a>`. Adjust the test to `expect(active).toHaveAttribute("data-active", "true")` if the attribute lands on the link itself.
 
-- [ ] **Step 6: Register items**
+- [x] **Step 6: Register items**
 
 Add both items to `registry.json`:
 
@@ -1465,7 +1465,7 @@ Add both items to `registry.json`:
 Run: `pnpm registry:check && pnpm typecheck`
 Expected: `registry ok: 6 items`, typecheck clean.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -1501,13 +1501,13 @@ git commit -m "feat(blocks): add app-shell and theme-provider"
   ```
   Column headers that should sort use `header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />`.
 
-- [ ] **Step 1: Install**
+- [x] **Step 1: Install**
 
 ```bash
 pnpm add @tanstack/react-table@^9
 ```
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 `components/blocks/__tests__/data-table.test.tsx`:
 
@@ -1590,12 +1590,12 @@ describe("DataTable", () => {
 })
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/data-table.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 `components/blocks/data-table.tsx`:
 
@@ -1836,12 +1836,12 @@ grep -o "sortFn_[a-zA-Z]*" node_modules/@tanstack/table-core/dist/esm/index.js |
 
 and adjust the import list. Do not fall back to `useLegacyTable`.
 
-- [ ] **Step 5: Run to verify it passes**
+- [x] **Step 5: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/data-table.test.tsx && pnpm typecheck`
 Expected: 5 passed, typecheck clean. If `row.getAllCells().filter(visible)` double-filters, use `row.getVisibleCells()` instead.
 
-- [ ] **Step 6: Register the item**
+- [x] **Step 6: Register the item**
 
 ```json
 {
@@ -1858,7 +1858,7 @@ Expected: 5 passed, typecheck clean. If `row.getAllCells().filter(visible)` doub
 Run: `pnpm registry:check`
 Expected: `registry ok: 7 items`
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -1891,13 +1891,13 @@ git commit -m "feat(blocks): add data-table on TanStack Table v9"
   ```
   `moveCard` is pure and is what drag-end calls; the test covers it directly since jsdom cannot drive pointer drags reliably.
 
-- [ ] **Step 1: Install**
+- [x] **Step 1: Install**
 
 ```bash
 pnpm add @dnd-kit/core@^6 @dnd-kit/sortable@^10 @dnd-kit/utilities@^3
 ```
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 `components/blocks/__tests__/kanban-board.test.tsx`:
 
@@ -1953,12 +1953,12 @@ describe("KanbanBoard", () => {
 })
 ```
 
-- [ ] **Step 3: Run to verify it fails**
+- [x] **Step 3: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/kanban-board.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 4: Implement**
+- [x] **Step 4: Implement**
 
 `components/blocks/kanban-board.tsx`:
 
@@ -2163,12 +2163,12 @@ export function KanbanBoard({ columns, cards, onCardsChange, renderCard, onCardC
 }
 ```
 
-- [ ] **Step 5: Run to verify it passes**
+- [x] **Step 5: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/kanban-board.test.tsx && pnpm typecheck`
 Expected: 5 passed. If `moveCard` ordering assertions fail, simplify the return to `[...others, ...target]` (other columns keep their relative order because `filter` is stable) and remove the sort. That simpler form is the intended implementation; the sort is defensive only.
 
-- [ ] **Step 6: Register the item**
+- [x] **Step 6: Register the item**
 
 ```json
 {
@@ -2185,7 +2185,7 @@ Expected: 5 passed. If `moveCard` ordering assertions fail, simplify the return 
 Run: `pnpm registry:check`
 Expected: `registry ok: 8 items`
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -2220,7 +2220,7 @@ git commit -m "feat(blocks): add kanban-board"
   export function Composer(props: ComposerProps): JSX.Element   // Enter sends, Shift+Enter newline, trims, ignores empty
   ```
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 `components/blocks/__tests__/message-list.test.tsx`:
 
@@ -2300,12 +2300,12 @@ describe("Composer", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify they fail**
+- [x] **Step 2: Run to verify they fail**
 
 Run: `pnpm vitest run components/blocks/__tests__/message-list.test.tsx components/blocks/__tests__/composer.test.tsx`
 Expected: FAIL, modules not found.
 
-- [ ] **Step 3: Implement `message-list`**
+- [x] **Step 3: Implement `message-list`**
 
 `components/blocks/message-list.tsx`:
 
@@ -2407,7 +2407,7 @@ export function MessageList({ messages, currentUserId, groupWindowMs = 5 * 60 * 
 }
 ```
 
-- [ ] **Step 4: Implement `composer`**
+- [x] **Step 4: Implement `composer`**
 
 `components/blocks/composer.tsx`:
 
@@ -2477,12 +2477,12 @@ export function Composer({ onSend, placeholder = "Write a message…", disabled,
 }
 ```
 
-- [ ] **Step 5: Run to verify they pass**
+- [x] **Step 5: Run to verify they pass**
 
 Run: `pnpm vitest run components/blocks/__tests__/message-list.test.tsx components/blocks/__tests__/composer.test.tsx`
 Expected: 6 passed.
 
-- [ ] **Step 6: Register both items**
+- [x] **Step 6: Register both items**
 
 ```json
 {
@@ -2508,7 +2508,7 @@ Expected: 6 passed.
 Run: `pnpm registry:check`
 Expected: `registry ok: 10 items`
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -2532,7 +2532,7 @@ git commit -m "feat(blocks): add message-list and composer"
   export function formatJson(value: unknown): string   // pretty JSON, strings passed through
   ```
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/blocks/__tests__/tool-call-card.test.tsx`:
 
@@ -2567,12 +2567,12 @@ describe("ToolCallCard", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/blocks/__tests__/tool-call-card.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/blocks/tool-call-card.tsx`:
 
@@ -2662,12 +2662,12 @@ export function ToolCallCard({ name, status, input, output, durationMs, defaultO
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/blocks/__tests__/tool-call-card.test.tsx`
 Expected: 3 passed.
 
-- [ ] **Step 5: Register the item**
+- [x] **Step 5: Register the item**
 
 ```json
 {
@@ -2684,7 +2684,7 @@ Expected: 3 passed.
 Run: `pnpm registry:check`
 Expected: `registry ok: 11 items`
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -2703,7 +2703,7 @@ git commit -m "feat(blocks): add tool-call-card"
 - Consumes: every block from Tasks 5 to 13; `installCommand()` from `lib/site.ts`.
 - Produces: routes `/` and `/blocks`.
 
-- [ ] **Step 1: Write the failing test for the install command widget**
+- [x] **Step 1: Write the failing test for the install command widget**
 
 `components/site/__tests__/install-command.test.tsx`:
 
@@ -2725,12 +2725,12 @@ describe("InstallCommand", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/site`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement the widget**
+- [x] **Step 3: Implement the widget**
 
 `components/site/install-command.tsx`:
 
@@ -2766,12 +2766,12 @@ export function InstallCommand({ item }: { item: string }) {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/site`
 Expected: 1 passed.
 
-- [ ] **Step 5: Build the site layout and home page**
+- [x] **Step 5: Build the site layout and home page**
 
 Delete the scaffolded `app/page.tsx`. Create:
 
@@ -2855,7 +2855,7 @@ export default function HomePage() {
 }
 ```
 
-- [ ] **Step 6: Build the blocks page with one demo per block**
+- [x] **Step 6: Build the blocks page with one demo per block**
 
 `app/(site)/blocks/page.tsx`:
 
@@ -3131,14 +3131,14 @@ export function ToolCallCardDemo() {
 }
 ```
 
-- [ ] **Step 7: Verify build and take a look**
+- [x] **Step 7: Verify build and take a look**
 
 Run: `pnpm typecheck && pnpm lint && pnpm build`
 Expected: all pass, route table lists `/` and `/blocks`.
 
 Run: `pnpm dev` and open `http://localhost:3000/blocks`. Every section renders; theme toggle switches dark mode; kanban cards drag between columns. Stop the server.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add -A
@@ -3157,7 +3157,7 @@ git commit -m "feat(site): gallery home and block demos"
 - Consumes: `public/r/*.json` from `pnpm registry:build`.
 - Produces: `pnpm smoke` exits 0 only if a fresh Next.js app can install every registry item from the local build and pass `next build` and `tsc`.
 
-- [ ] **Step 1: Write the script**
+- [x] **Step 1: Write the script**
 
 `scripts/smoke-install.sh`:
 
@@ -3200,7 +3200,7 @@ Add to `package.json` scripts:
 "smoke": "bash scripts/smoke-install.sh"
 ```
 
-- [ ] **Step 2: Run it**
+- [x] **Step 2: Run it**
 
 Run: `SMOKE_DIR=/private/tmp/claude-501/-Users-jakeuren-dev-personal/44a0ff6d-cc8f-42c9-9b52-d0de677087cf/scratchpad/smoke pnpm smoke`
 Expected: ends with `✔ smoke install passed for: page-header empty-state ... tool-call-card`.
@@ -3211,7 +3211,7 @@ Likely failures and the fix for each:
 - **Missing primitive** (`@/components/ui/collapsible`): add the primitive name to `registryDependencies`.
 - **`@kit/theme-provider` unresolved**: the consumer has no `@kit` namespace configured. Change that dependency to the built URL form is not possible locally, so instead add the file path form: `"./theme-provider.json"` is resolved relative to the item file. Use `"registryDependencies": [..., "./theme-provider.json"]` in `registry.json` for `app-shell`, and update `checkRegistry` to accept `./<name>.json` as a local reference (same validation as `@kit/<name>`), with a new test case mirroring the `@kit/` ones.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add -A
@@ -3225,7 +3225,7 @@ git commit -m "test: add registry install smoke test"
 **Files:**
 - Create: `.github/workflows/ci.yml`, `README.md`
 
-- [ ] **Step 1: CI**
+- [x] **Step 1: CI**
 
 `.github/workflows/ci.yml`:
 
@@ -3257,7 +3257,7 @@ jobs:
       - run: pnpm smoke
 ```
 
-- [ ] **Step 2: README**
+- [x] **Step 2: README**
 
 `README.md`:
 
@@ -3309,7 +3309,7 @@ Install a block or a template:
 5. `pnpm registry:check && pnpm smoke`.
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add -A
