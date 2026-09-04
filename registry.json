@@ -116,6 +116,109 @@
           "target": "components/blocks/app-shell.tsx"
         }
       ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:block",
+      "title": "Data Table",
+      "description": "TanStack Table v9 wrapper with sorting, pagination, row selection, column visibility and a toolbar slot.",
+      "dependencies": [
+        "@tanstack/react-table",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "table",
+        "button",
+        "checkbox",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/data-table.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/data-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kanban-board",
+      "type": "registry:block",
+      "title": "Kanban Board",
+      "description": "Columns and draggable cards using dnd-kit. Controlled via cards + onCardsChange.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities"
+      ],
+      "registryDependencies": [
+        "card",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/kanban-board.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/kanban-board.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message-list",
+      "type": "registry:block",
+      "title": "Message List",
+      "description": "Grouped chat bubbles with timestamps, read receipts and an attachments slot.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/message-list.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/message-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "composer",
+      "type": "registry:block",
+      "title": "Composer",
+      "description": "Chat input with Enter-to-send, attachment and emoji triggers, and slots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/composer.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/composer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-call-card",
+      "type": "registry:block",
+      "title": "Tool Call Card",
+      "description": "Collapsible card showing an agent tool call status, input and output.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/tool-call-card.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/tool-call-card.tsx"
+        }
+      ]
     }
   ]
 }
