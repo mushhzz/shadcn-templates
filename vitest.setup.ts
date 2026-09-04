@@ -1,5 +1,9 @@
 import "@testing-library/jest-dom/vitest"
-import { vi } from "vitest"
+import { cleanup } from "@testing-library/react"
+import { afterEach, vi } from "vitest"
+
+// Testing Library only auto-cleans when vitest globals are enabled.
+afterEach(() => cleanup())
 
 // shadcn sidebar's useIsMobile and next-themes use matchMedia.
 if (!window.matchMedia) {
