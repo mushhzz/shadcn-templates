@@ -155,7 +155,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
                     ) : null}
                   </div>
                   <div className="grid min-w-0 flex-1 gap-0.5">
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex min-w-0 items-center gap-1.5">
                       <span className={cn("truncate text-sm", c.unread > 0 ? "font-semibold" : "font-medium")}>{c.title}</span>
                       {c.pinned ? <Pin className="size-3 shrink-0 text-muted-foreground" /> : null}
                       {c.muted ? <BellOff className="size-3 shrink-0 text-muted-foreground" /> : null}
@@ -163,8 +163,8 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
                         {c.lastMessage ? stamp(c.lastMessage) : ""}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className={cn("truncate text-xs", c.unread > 0 ? "text-foreground" : "text-muted-foreground")}>
+                    <div className="flex min-w-0 items-center gap-2">
+                      <span className={cn("min-w-0 truncate text-xs", c.unread > 0 ? "text-foreground" : "text-muted-foreground")}>
                         {preview(c.lastMessage, currentUser.id)}
                       </span>
                       {c.unread > 0 ? (
