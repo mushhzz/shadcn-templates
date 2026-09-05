@@ -1,13 +1,30 @@
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { InstallCommand } from "@/components/site/install-command"
 
-const templates = [
+type Template = {
+  name: string
+  title: string
+  description: string
+  status: "ready" | "coming soon"
+  href?: string
+}
+
+const templates: Template[] = [
   {
     name: "dashboard",
     title: "Admin Dashboard",
-    description: "Stats, charts, tables and settings.",
-    status: "coming soon",
+    description: "Overview, analytics, customers, orders and settings.",
+    status: "ready",
+    href: "/dashboard",
   },
   {
     name: "chat",
@@ -27,7 +44,7 @@ const templates = [
     description: "Agent workspace, builder, runs and usage.",
     status: "coming soon",
   },
-] as const
+]
 
 export default function HomePage() {
   return (
@@ -47,12 +64,17 @@ export default function HomePage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>{t.title}</CardTitle>
-                <Badge variant="secondary">{t.status}</Badge>
+                <Badge variant={t.status === "ready" ? "default" : "secondary"}>{t.status}</Badge>
               </div>
               <CardDescription>{t.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <InstallCommand item={t.name} />
+              {t.href ? (
+                <Button asChild variant="outline" size="sm" className="mt-3">
+                  <Link href={t.href}>View demo</Link>
+                </Button>
+              ) : null}
             </CardContent>
           </Card>
         ))}

@@ -219,6 +219,96 @@
           "target": "components/blocks/tool-call-card.tsx"
         }
       ]
+    },
+    {
+      "name": "dashboard",
+      "type": "registry:block",
+      "title": "Admin Dashboard",
+      "description": "Overview, analytics, customers, orders and settings pages on the app shell, with typed mock data.",
+      "dependencies": [
+        "lucide-react",
+        "recharts",
+        "@tanstack/react-table"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "avatar",
+        "input",
+        "label",
+        "select",
+        "sheet",
+        "tabs",
+        "switch",
+        "dialog",
+        "separator",
+        "table",
+        "textarea",
+        "@kit/app-shell",
+        "@kit/page-header",
+        "@kit/stat-card",
+        "@kit/chart-card",
+        "@kit/data-table",
+        "@kit/empty-state"
+      ],
+      "files": [
+        {
+          "path": "app/(preview)/dashboard/layout.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/page.tsx"
+        },
+        {
+          "path": "components/dashboard/dashboard-shell.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/dashboard-shell.tsx"
+        },
+        {
+          "path": "components/dashboard/status-badge.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/status-badge.tsx"
+        },
+        {
+          "path": "components/dashboard/revenue-chart.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/revenue-chart.tsx"
+        },
+        {
+          "path": "components/dashboard/recent-orders-table.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/recent-orders-table.tsx"
+        },
+        {
+          "path": "components/dashboard/activity-feed.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/activity-feed.tsx"
+        },
+        {
+          "path": "lib/dashboard/types.ts",
+          "type": "registry:lib",
+          "target": "lib/dashboard/types.ts"
+        },
+        {
+          "path": "lib/dashboard/format.ts",
+          "type": "registry:lib",
+          "target": "lib/dashboard/format.ts"
+        },
+        {
+          "path": "lib/dashboard/fixtures.ts",
+          "type": "registry:lib",
+          "target": "lib/dashboard/fixtures.ts"
+        },
+        {
+          "path": "lib/dashboard/queries.ts",
+          "type": "registry:lib",
+          "target": "lib/dashboard/queries.ts"
+        }
+      ]
     }
   ]
 }
