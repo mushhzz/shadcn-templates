@@ -602,6 +602,146 @@
           "target": "lib/chat/queries.ts"
         }
       ]
+    },
+    {
+      "name": "agent",
+      "type": "registry:block",
+      "title": "AI Agent Platform",
+      "description": "Agent chat workspace with tool-call cards and model picker, agent builder, runs and traces, usage charts and API keys.",
+      "dependencies": [
+        "lucide-react",
+        "recharts",
+        "@tanstack/react-table"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "input",
+        "label",
+        "select",
+        "checkbox",
+        "textarea",
+        "tabs",
+        "dialog",
+        "table",
+        "@kit/app-shell",
+        "@kit/page-header",
+        "@kit/stat-card",
+        "@kit/chart-card",
+        "@kit/data-table",
+        "@kit/message-list",
+        "@kit/composer",
+        "@kit/tool-call-card",
+        "@kit/empty-state"
+      ],
+      "files": [
+        {
+          "path": "app/(preview)/agent/layout.tsx",
+          "type": "registry:page",
+          "target": "app/agent/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/agents/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/agents/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/agents/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/agents/[id]/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/runs/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/runs/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/runs/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/runs/[id]/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/usage/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/usage/page.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/keys/page.tsx",
+          "type": "registry:page",
+          "target": "app/agent/keys/page.tsx"
+        },
+        {
+          "path": "components/agent/agent-shell.tsx",
+          "type": "registry:component",
+          "target": "components/agent/agent-shell.tsx"
+        },
+        {
+          "path": "components/agent/status-badge.tsx",
+          "type": "registry:component",
+          "target": "components/agent/status-badge.tsx"
+        },
+        {
+          "path": "components/agent/model-picker.tsx",
+          "type": "registry:component",
+          "target": "components/agent/model-picker.tsx"
+        },
+        {
+          "path": "components/agent/agent-workspace.tsx",
+          "type": "registry:component",
+          "target": "components/agent/agent-workspace.tsx"
+        },
+        {
+          "path": "components/agent/agents-list.tsx",
+          "type": "registry:component",
+          "target": "components/agent/agents-list.tsx"
+        },
+        {
+          "path": "components/agent/agent-builder.tsx",
+          "type": "registry:component",
+          "target": "components/agent/agent-builder.tsx"
+        },
+        {
+          "path": "components/agent/runs-table.tsx",
+          "type": "registry:component",
+          "target": "components/agent/runs-table.tsx"
+        },
+        {
+          "path": "components/agent/run-timeline.tsx",
+          "type": "registry:component",
+          "target": "components/agent/run-timeline.tsx"
+        },
+        {
+          "path": "components/agent/usage-charts.tsx",
+          "type": "registry:component",
+          "target": "components/agent/usage-charts.tsx"
+        },
+        {
+          "path": "components/agent/api-keys-table.tsx",
+          "type": "registry:component",
+          "target": "components/agent/api-keys-table.tsx"
+        },
+        {
+          "path": "lib/agent/types.ts",
+          "type": "registry:lib",
+          "target": "lib/agent/types.ts"
+        },
+        {
+          "path": "lib/agent/fixtures.ts",
+          "type": "registry:lib",
+          "target": "lib/agent/fixtures.ts"
+        },
+        {
+          "path": "lib/agent/queries.ts",
+          "type": "registry:lib",
+          "target": "lib/agent/queries.ts"
+        }
+      ]
     }
   ]
 }

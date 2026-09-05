@@ -40,11 +40,16 @@ Install a block or a template:
 | Name | Pages | Install |
 |---|---|---|
 | `dashboard` | Overview, Analytics, Customers, Orders, Settings | `npx shadcn@latest add @kit/dashboard` |
+| `crm` | Overview, Contacts (+detail), Companies (+detail), Deals board/list, Tasks | `npx shadcn@latest add @kit/crm` |
+| `chat` | Three-pane chat, new conversation/group dialogs, Contacts, Settings | `npx shadcn@latest add @kit/chat` |
+| `agent` | Agent workspace with tool calls, Agents (+builder), Runs (+trace), Usage, API keys | `npx shadcn@latest add @kit/agent` |
 
 Templates install pages under `app/<template>/`, components under
 `components/<template>/`, and typed mock data under `lib/<template>/`. Replace
 the functions in `lib/<template>/queries.ts` with real data access and the UI
-keeps working. `chat`, `crm` and `agent` are in progress.
+keeps working. All templates are responsive (sidebar becomes a sheet on
+phones, tables scroll inside their cards, boards support touch drag) and
+support dark mode.
 
 ## Develop
 

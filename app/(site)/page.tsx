@@ -44,7 +44,8 @@ const templates: Template[] = [
     name: "agent",
     title: "AI Agent Platform",
     description: "Agent workspace, builder, runs and usage.",
-    status: "coming soon",
+    status: "ready",
+    href: "/agent",
   },
 ]
 
