@@ -89,7 +89,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               <Button variant="outline" size="sm" className="hidden h-8 lg:inline-flex">
                 <CalendarDays className="size-4" /> 09 Aug – 05 Sep 2026
               </Button>
-              <Button size="sm" className="h-8" onClick={() => toast("Report download started")}>
+              <Button size="sm" className="h-8" aria-label="Download report" onClick={() => toast("Report download started")}>
                 <Download className="size-4" /> <span className="hidden sm:inline">Download</span>
               </Button>
             </>

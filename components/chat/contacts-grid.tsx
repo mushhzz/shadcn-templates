@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { EmptyState } from "@/components/blocks/empty-state"
 import { PresenceDot } from "@/components/chat/presence-dot"
 import type { ChatUserRow, Presence } from "@/lib/chat/types"
@@ -27,14 +27,12 @@ export function ContactsGrid({ contacts }: { contacts: ChatUserRow[] }) {
           <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input placeholder="Search people" className="h-9 pl-8" value={query} onChange={(e) => setQuery(e.target.value)} />
         </div>
-        <Tabs value={presence} onValueChange={(v) => setPresence(v as Presence | "all")}>
-          <TabsList>
-            <TabsTrigger value="all">All</TabsTrigger>
-            <TabsTrigger value="online">Online</TabsTrigger>
-            <TabsTrigger value="away">Away</TabsTrigger>
-            <TabsTrigger value="offline">Offline</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <ToggleGroup type="single" variant="outline" size="sm" aria-label="Filter by status" value={presence} onValueChange={(v) => v && setPresence(v as Presence | "all")}>
+          <ToggleGroupItem value="all">All</ToggleGroupItem>
+          <ToggleGroupItem value="online">Online</ToggleGroupItem>
+          <ToggleGroupItem value="away">Away</ToggleGroupItem>
+          <ToggleGroupItem value="offline">Offline</ToggleGroupItem>
+        </ToggleGroup>
       </div>
       {filtered.length === 0 ? (
         <EmptyState title="No people found" description="Try a different name or status." />

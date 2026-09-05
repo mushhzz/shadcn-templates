@@ -35,10 +35,7 @@ export function TasksList({ tasks: initial }: { tasks: TaskRow[] }) {
             {g.tasks.map((t) => (
               <label
                 key={t.id}
-                className={cn(
-                  "flex cursor-pointer items-start gap-3 rounded-md px-2 py-2 hover:bg-muted/60",
-                  t.done && "opacity-60",
-                )}
+                className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-2 hover:bg-muted/60"
               >
                 <Checkbox
                   className="mt-0.5"
@@ -47,7 +44,7 @@ export function TasksList({ tasks: initial }: { tasks: TaskRow[] }) {
                   aria-label={`Mark ${t.title} ${t.done ? "not done" : "done"}`}
                 />
                 <div className="grid flex-1 gap-1 text-sm">
-                  <span className={cn("font-medium", t.done && "line-through")}>{t.title}</span>
+                  <span className={cn("font-medium", t.done && "text-muted-foreground line-through")}>{t.title}</span>
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
                     <span suppressHydrationWarning>{formatRelative(t.dueAt)}</span>
                     {t.contactName ? <span>· {t.contactName}</span> : null}

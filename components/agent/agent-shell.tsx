@@ -75,7 +75,7 @@ export function AgentShell({ children }: { children: React.ReactNode }) {
         sidebarHeader={<WorkspaceSwitcher workspaces={workspaces} activeId={workspace} onChange={setWorkspace} onCreate={() => toast("Workspace creation is mocked")} />}
         headerActions={
           pathname === "/agent/agents" ? (
-            <Button size="sm" className="h-8" onClick={() => toast("New agent dialog is mocked")}>
+            <Button size="sm" className="h-8" aria-label="New agent" onClick={() => toast("New agent dialog is mocked")}>
               <Plus className="size-4" /> <span className="hidden sm:inline">New agent</span>
             </Button>
           ) : null

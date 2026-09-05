@@ -26,7 +26,7 @@ export function RatingBreakdown({ title, description, counts, actions, className
       </CardHeader>
       <CardContent className="flex flex-col gap-6 sm:flex-row sm:items-center">
         <div className="flex flex-col items-center gap-1 sm:w-32">
-          <div className="flex" aria-label={`${average.toFixed(1)} out of 5`}>
+          <div className="flex" role="img" aria-label={`${average.toFixed(1)} out of 5`}>
             {[1, 2, 3, 4, 5].map((s) => (
               <Star key={s} className={cn("size-5", s <= Math.round(average) ? "fill-warning text-warning" : "text-muted-foreground/40")} aria-hidden />
             ))}

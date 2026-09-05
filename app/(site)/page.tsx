@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -63,7 +64,12 @@ export default function HomePage() {
       </section>
       <section className="grid gap-4 sm:grid-cols-2" aria-label="Templates">
         {templates.map((t) => (
-          <Card key={t.name}>
+          <Card key={t.name} className="overflow-hidden pt-0">
+            {t.href ? (
+              <Link href={t.href} className="block border-b bg-muted/40" aria-label={`Preview ${t.title}`}>
+                <Image src={`/screenshots/${t.name}.png`} alt={`${t.title} screenshot`} width={1280} height={800} className="aspect-[16/10] w-full object-cover object-top" />
+              </Link>
+            ) : null}
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>{t.title}</CardTitle>

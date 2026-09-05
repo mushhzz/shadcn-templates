@@ -21,19 +21,31 @@ Install a block or a template:
 
 ## Blocks
 
+Every block ships with a skeleton, passes axe at AA, and works at 390px.
+
 | Name | What it is |
 |---|---|
+| `tokens` | Semantic `success` / `warning` / `info` colour tokens (theme item) |
+| `app-shell` | Sidebar with nested groups, header slots, breadcrumbs, user menu, theme toggle |
+| `command-palette` | ⌘K dialog with grouped commands, keywords, shortcuts |
+| `notifications` | Bell with unread indicator, All/Unread tabs, mark as read |
+| `workspace-switcher` | Team/workspace dropdown for the sidebar header |
+| `theme-customizer` | Colour presets, radius and mode; persisted per browser |
 | `page-header` | Title, description, actions slot |
 | `empty-state` | Icon, message, primary action |
-| `stat-card` | KPI with delta and sparkline |
-| `chart-card` | Recharts wrapper with time-range tabs |
-| `app-shell` | Sidebar + header + breadcrumbs + user menu + theme toggle |
-| `theme-provider` | next-themes provider with a toggle hotkey |
-| `data-table` | TanStack Table v9: sort, paginate, select, hide columns |
-| `kanban-board` | dnd-kit columns and draggable cards |
-| `message-list` | Grouped chat bubbles with read receipts |
-| `composer` | Chat input, Enter to send |
-| `tool-call-card` | Collapsible agent tool call with input/output |
+| `stat-card` | KPI with icon, delta, line or bar sparkline |
+| `chart-card` | Recharts wrapper with range toggle and actions slot |
+| `donut-chart` | Donut with centre total and legend |
+| `progress-list` | Ranked list with proportional bars and deltas |
+| `highlight-card` | Hero card for a headline metric |
+| `rating-breakdown` | Average stars with per-star distribution |
+| `data-table` | TanStack Table v9: search, faceted filters, sort menu, row actions, bulk bar, CSV export, page size |
+| `kanban-board` | dnd-kit columns: WIP limits, add card, column actions, touch and keyboard drag, announcements |
+| `message-list` | Composable `Message*` primitives plus a grouped list with hover actions |
+| `composer` | Chat input with status-aware submit/stop, attachments, auto-resize |
+| `tool-call-card` | Collapsible tool call; accepts AI SDK tool states |
+| `auth-layout`, `auth-forms`, `auth-pages` | Two-column auth shell; login, signup, forgot password; ready routes |
+| `error-page` | 404 / 500 / maintenance state |
 
 ## Templates
 
@@ -59,6 +71,11 @@ support dark mode.
     pnpm registry:check   # validate registry.json against the filesystem
     pnpm registry:build   # emit public/r/*.json
     pnpm smoke            # install every item into a throwaway Next.js app and build it
+    pnpm qa               # axe (AA) + horizontal-overflow check on every route at 1400px and 390px
+    pnpm qa:shots         # same, plus regenerate public/screenshots/*.png for the gallery
+
+`pnpm qa` needs a running server (`pnpm dev` or `pnpm start`) and Chromium
+(`pnpm playwright:install` once). CI runs it against a production build.
 
 ## Layout
 

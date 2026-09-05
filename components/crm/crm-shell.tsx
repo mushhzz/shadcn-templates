@@ -69,7 +69,7 @@ export function CrmShell({ children }: { children: React.ReactNode }) {
         currentPath={pathname}
         sidebarHeader={<WorkspaceSwitcher workspaces={workspaces} activeId={workspace} onChange={setWorkspace} />}
         headerActions={
-          <Button size="sm" className="h-8" onClick={() => toast("New deal dialog is mocked")}>
+          <Button size="sm" className="h-8" aria-label="New deal" onClick={() => toast("New deal dialog is mocked")}>
             <Plus className="size-4" /> <span className="hidden sm:inline">New deal</span>
           </Button>
         }

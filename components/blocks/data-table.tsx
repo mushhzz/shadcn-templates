@@ -518,7 +518,7 @@ export function DataTable<TData extends RowData>({
 
   return (
     <DataTableContext.Provider value={table as unknown as DataTableInstance<RowData>}>
-      <div data-slot="data-table" className={cn("flex flex-col gap-3", className)}>
+      <div data-slot="data-table" className={cn("flex min-w-0 flex-col gap-3", className)}>
         {showToolbar ? (
           <div className="flex flex-wrap items-center gap-2">
             {enableSearch ? (

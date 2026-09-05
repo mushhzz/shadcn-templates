@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -43,7 +44,11 @@ export default function UsagePage() {
             <TableBody>
               {getUsageByAgent().map((u) => (
                 <TableRow key={u.agentId}>
-                  <TableCell className="font-medium">{u.agentName}</TableCell>
+                  <TableCell className="font-medium">
+                    <Link href={`/agent/agents/${u.agentId}`} className="underline-offset-4 hover:underline">
+                      {u.agentName}
+                    </Link>
+                  </TableCell>
                   <TableCell>{u.model ? <Badge variant="secondary">{modelName(u.model)}</Badge> : null}</TableCell>
                   <TableCell className="text-right tabular-nums">{formatTokens(u.tokens)}</TableCell>
                   <TableCell className="text-right tabular-nums">{formatDuration(u.latencyMs)}</TableCell>

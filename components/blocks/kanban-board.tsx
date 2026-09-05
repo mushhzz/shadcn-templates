@@ -244,7 +244,7 @@ export function KanbanBoard({
       onDragEnd={handleDragEnd}
       onDragCancel={() => setActiveId(null)}
     >
-      <div data-slot="kanban-board" className={cn("flex gap-4 overflow-x-auto pb-2", className)}>
+      <div data-slot="kanban-board" className={cn("flex w-full min-w-0 gap-4 overflow-x-auto pb-2", className)}>
         {columns.map((col) => (
           <Column
             key={col.id}
@@ -271,7 +271,7 @@ export function KanbanBoard({
 
 export function KanbanBoardSkeleton({ columns = 4, className }: { columns?: number; className?: string }) {
   return (
-    <div data-slot="kanban-board-skeleton" className={cn("flex gap-4 overflow-x-auto pb-2", className)} aria-busy>
+    <div data-slot="kanban-board-skeleton" className={cn("flex w-full min-w-0 gap-4 overflow-x-auto pb-2", className)} aria-busy>
       {Array.from({ length: columns }).map((_, i) => (
         <div key={i} className="flex w-72 shrink-0 flex-col gap-2 rounded-lg bg-muted/50 p-2">
           <div className="flex items-center justify-between px-1 py-1">
