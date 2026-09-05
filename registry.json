@@ -307,6 +307,26 @@
           "path": "lib/dashboard/queries.ts",
           "type": "registry:lib",
           "target": "lib/dashboard/queries.ts"
+        },
+        {
+          "path": "app/(preview)/dashboard/analytics/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/analytics/page.tsx"
+        },
+        {
+          "path": "components/dashboard/channels-chart.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/channels-chart.tsx"
+        },
+        {
+          "path": "components/dashboard/signups-chart.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/signups-chart.tsx"
+        },
+        {
+          "path": "components/dashboard/top-products.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/top-products.tsx"
         }
       ]
     }
