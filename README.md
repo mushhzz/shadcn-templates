@@ -35,7 +35,16 @@ Install a block or a template:
 | `composer` | Chat input, Enter to send |
 | `tool-call-card` | Collapsible agent tool call with input/output |
 
-Templates (`dashboard`, `chat`, `crm`, `agent`) are in progress.
+## Templates
+
+| Name | Pages | Install |
+|---|---|---|
+| `dashboard` | Overview, Analytics, Customers, Orders, Settings | `npx shadcn@latest add @kit/dashboard` |
+
+Templates install pages under `app/<template>/`, components under
+`components/<template>/`, and typed mock data under `lib/<template>/`. Replace
+the functions in `lib/<template>/queries.ts` with real data access and the UI
+keeps working. `chat`, `crm` and `agent` are in progress.
 
 ## Develop
 

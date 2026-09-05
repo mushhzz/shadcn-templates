@@ -98,7 +98,7 @@ app/(preview)/dashboard/
   ```
 - Produces (format): `formatCurrency(n)`, `formatNumber(n)`, `formatPercent(n)`, `formatRelative(date, now?)`, `formatDate(date)`, `initialsOf(name)`.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 `lib/dashboard/__tests__/format.test.ts`:
 
@@ -203,12 +203,12 @@ describe("dashboard queries", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify they fail**
+- [x] **Step 2: Run to verify they fail**
 
 Run: `pnpm vitest run lib/dashboard`
 Expected: FAIL, modules not found.
 
-- [ ] **Step 3: Types**
+- [x] **Step 3: Types**
 
 `lib/dashboard/types.ts`:
 
@@ -278,7 +278,7 @@ export type CustomerRow = Omit<Customer, "createdMinutesAgo"> & {
 }
 ```
 
-- [ ] **Step 4: Formatters**
+- [x] **Step 4: Formatters**
 
 `lib/dashboard/format.ts`:
 
@@ -324,7 +324,7 @@ export function initialsOf(name: string): string {
 }
 ```
 
-- [ ] **Step 5: Fixtures**
+- [x] **Step 5: Fixtures**
 
 `lib/dashboard/fixtures.ts`. Customers, products, activity, monthly and team are hand-written. Orders are derived from those lists by a tiny fixed-seed generator kept in this file so the data is deterministic and committed without 40 hand-typed rows.
 
@@ -446,7 +446,7 @@ export const invoices: Invoice[] = [
 ]
 ```
 
-- [ ] **Step 6: Queries**
+- [x] **Step 6: Queries**
 
 `lib/dashboard/queries.ts`:
 
@@ -561,12 +561,12 @@ export function getInvoices(): Invoice[] {
 export { products }
 ```
 
-- [ ] **Step 7: Run to verify tests pass**
+- [x] **Step 7: Run to verify tests pass**
 
 Run: `pnpm vitest run lib/dashboard`
 Expected: 13 passed. If `formatCurrency(1234)` yields `$1,234.00`, keep the two formatters as written; the whole-number path uses `maximumFractionDigits: 0`.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add lib/dashboard
@@ -594,7 +594,7 @@ git commit -m "feat(dashboard): types, fixtures, formatters and queries"
   export function ActivityFeed({ items }: { items: (Activity & { at: Date })[] }): JSX.Element
   ```
 
-- [ ] **Step 1: Write the failing shell test**
+- [x] **Step 1: Write the failing shell test**
 
 `components/dashboard/__tests__/dashboard-shell.test.tsx`:
 
@@ -632,12 +632,12 @@ describe("DashboardShell", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/dashboard`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Shell and status badge**
+- [x] **Step 3: Shell and status badge**
 
 `components/dashboard/dashboard-shell.tsx`:
 
@@ -719,7 +719,7 @@ export function StatusBadge({ status }: { status: OrderStatus | CustomerStatus }
 }
 ```
 
-- [ ] **Step 4: Overview widgets**
+- [x] **Step 4: Overview widgets**
 
 `components/dashboard/revenue-chart.tsx`:
 
@@ -829,7 +829,7 @@ export function ActivityFeed({ items }: { items: (Activity & { at: Date })[] }) 
 }
 ```
 
-- [ ] **Step 5: Layout and overview page**
+- [x] **Step 5: Layout and overview page**
 
 `app/(preview)/dashboard/layout.tsx`:
 
@@ -885,14 +885,14 @@ export default function OverviewPage() {
 }
 ```
 
-- [ ] **Step 6: Run shell test, typecheck, and view**
+- [x] **Step 6: Run shell test, typecheck, and view**
 
 Run: `pnpm vitest run components/dashboard && pnpm typecheck`
 Expected: 2 passed, typecheck clean.
 
 With `pnpm dev` running, open `http://localhost:3000/dashboard`. Expect the sidebar with five links, four stat cards, the revenue chart with 3m/6m/12m tabs, the activity feed, and a paginated recent orders table.
 
-- [ ] **Step 7: Register the item and link the preview**
+- [x] **Step 7: Register the item and link the preview**
 
 Add to `registry.json` `items` (files will grow in later tasks):
 
@@ -938,7 +938,7 @@ In `app/(site)/page.tsx`, change the dashboard entry to `status: "ready"` and ad
 Run: `pnpm registry:check && pnpm lint`
 Expected: `registry ok: 12 items`, lint clean.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add -A
@@ -956,7 +956,7 @@ git commit -m "feat(dashboard): shell, overview page and registry item"
 **Interfaces:**
 - Produces: `ChannelsChart({ data: MonthlyMetric[] })`, `SignupsChart({ data: MonthlyMetric[] })`, `TopProducts({ items: ReturnType<typeof getTopProducts> })`.
 
-- [ ] **Step 1: Charts**
+- [x] **Step 1: Charts**
 
 `components/dashboard/channels-chart.tsx`:
 
@@ -1067,7 +1067,7 @@ export function TopProducts({ items }: { items: ReturnType<typeof getTopProducts
 }
 ```
 
-- [ ] **Step 2: Page**
+- [x] **Step 2: Page**
 
 `app/(preview)/dashboard/analytics/page.tsx`:
 
@@ -1095,7 +1095,7 @@ export default function AnalyticsPage() {
 }
 ```
 
-- [ ] **Step 3: Register files, verify**
+- [x] **Step 3: Register files, verify**
 
 Add to the `dashboard` item's `files`:
 
@@ -1109,7 +1109,7 @@ Add to the `dashboard` item's `files`:
 Run: `pnpm registry:check && pnpm typecheck && pnpm lint`
 Expected: all clean. Open `http://localhost:3000/dashboard/analytics`: four cards in a 2x2 grid.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add -A
@@ -1128,7 +1128,7 @@ git commit -m "feat(dashboard): analytics page"
 **Interfaces:**
 - Produces: `CustomersTable({ customers: CustomerRow[]; orders: OrderRow[] })`. Search filters by name, email, company (case-insensitive). Status `Select` with "all" default. Clicking a row opens a `Sheet` with the customer's details and their orders.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 `components/dashboard/__tests__/customers-table.test.tsx`:
 
@@ -1163,12 +1163,12 @@ describe("CustomersTable", () => {
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
+- [x] **Step 2: Run to verify it fails**
 
 Run: `pnpm vitest run components/dashboard/__tests__/customers-table.test.tsx`
 Expected: FAIL, module not found.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 `components/dashboard/customers-table.tsx`:
 
@@ -1344,7 +1344,7 @@ export default function CustomersPage() {
 }
 ```
 
-- [ ] **Step 4: Run to verify it passes**
+- [x] **Step 4: Run to verify it passes**
 
 Run: `pnpm vitest run components/dashboard/__tests__/customers-table.test.tsx`
 Expected: 2 passed. If the Radix `Select` throws about `hasPointerCapture` in jsdom, add to `vitest.setup.ts`:
@@ -1357,7 +1357,7 @@ if (!Element.prototype.hasPointerCapture) {
 }
 ```
 
-- [ ] **Step 5: Register files and commit**
+- [x] **Step 5: Register files and commit**
 
 Add to the `dashboard` item's `files`:
 
@@ -1384,7 +1384,7 @@ git commit -m "feat(dashboard): customers page with detail sheet"
 **Interfaces:**
 - Produces: `OrdersTable({ orders: OrderRow[]; products: Product[] })`. Status `Select` filter, row select column, sheet shows line items with product names and totals.
 
-- [ ] **Step 1: Implement**
+- [x] **Step 1: Implement**
 
 `components/dashboard/orders-table.tsx`:
 
@@ -1525,7 +1525,7 @@ export default function OrdersPage() {
 }
 ```
 
-- [ ] **Step 2: Register files, verify, commit**
+- [x] **Step 2: Register files, verify, commit**
 
 Add to the `dashboard` item's `files`:
 
@@ -1549,7 +1549,7 @@ git commit -m "feat(dashboard): orders page with detail sheet"
 - Create: `components/dashboard/settings-profile.tsx`, `components/dashboard/settings-team.tsx`, `components/dashboard/settings-notifications.tsx`, `components/dashboard/settings-billing.tsx`, `app/(preview)/dashboard/settings/page.tsx`
 - Modify: `registry.json`
 
-- [ ] **Step 1: Profile form**
+- [x] **Step 1: Profile form**
 
 `components/dashboard/settings-profile.tsx`:
 
@@ -1602,7 +1602,7 @@ export function SettingsProfile() {
 }
 ```
 
-- [ ] **Step 2: Team**
+- [x] **Step 2: Team**
 
 `components/dashboard/settings-team.tsx`:
 
@@ -1722,7 +1722,7 @@ export function SettingsTeam({ members: initial }: { members: TeamMember[] }) {
 }
 ```
 
-- [ ] **Step 3: Notifications and billing**
+- [x] **Step 3: Notifications and billing**
 
 `components/dashboard/settings-notifications.tsx`:
 
@@ -1833,7 +1833,7 @@ export function SettingsBilling({ invoices }: { invoices: Invoice[] }) {
 }
 ```
 
-- [ ] **Step 4: Page**
+- [x] **Step 4: Page**
 
 `app/(preview)/dashboard/settings/page.tsx`:
 
@@ -1867,7 +1867,7 @@ export default function SettingsPage() {
 }
 ```
 
-- [ ] **Step 5: Register files, verify, commit**
+- [x] **Step 5: Register files, verify, commit**
 
 Add to the `dashboard` item's `files`:
 
@@ -1895,19 +1895,19 @@ git commit -m "feat(dashboard): settings page"
 **Files:**
 - Modify: `README.md`
 
-- [ ] **Step 1: Full local verification**
+- [x] **Step 1: Full local verification**
 
 Run: `pnpm test && pnpm lint && pnpm typecheck && pnpm build`
 Expected: all green; build route table includes `/dashboard`, `/dashboard/analytics`, `/dashboard/customers`, `/dashboard/orders`, `/dashboard/settings`.
 
-- [ ] **Step 2: Smoke install**
+- [x] **Step 2: Smoke install**
 
 Run: `SMOKE_DIR=<scratchpad>/smoke pnpm smoke`
 Expected: `✔ smoke install passed for: ... dashboard`. The consumer build's route table must list `/dashboard/*` routes, which proves `registry:page` targets landed. If the consumer build fails on `usePathname` or hooks, the failing file is missing `"use client"`; add it in the source and re-run.
 
 Consumer root layout note: `shadcn init` writes a root layout that already wraps `ThemeProvider`, so the installed dashboard renders with theme support out of the box. If the item is added to a project without one, the theme toggle is inert but nothing breaks.
 
-- [ ] **Step 3: README**
+- [x] **Step 3: README**
 
 Replace the line `Templates (`dashboard`, `chat`, `crm`, `agent`) are in progress.` with:
 
@@ -1924,7 +1924,7 @@ the functions in `lib/<template>/queries.ts` with real data access and the UI
 keeps working. `chat`, `crm` and `agent` are in progress.
 ```
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add -A
