@@ -374,6 +374,138 @@
           "target": "components/dashboard/settings-billing.tsx"
         }
       ]
+    },
+    {
+      "name": "crm",
+      "type": "registry:block",
+      "title": "CRM",
+      "description": "Contacts, companies, deals pipeline (kanban + list) and tasks on the app shell, with typed mock data.",
+      "dependencies": [
+        "lucide-react",
+        "recharts",
+        "@tanstack/react-table"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "avatar",
+        "input",
+        "select",
+        "sheet",
+        "tabs",
+        "checkbox",
+        "separator",
+        "@kit/app-shell",
+        "@kit/page-header",
+        "@kit/stat-card",
+        "@kit/chart-card",
+        "@kit/data-table",
+        "@kit/kanban-board",
+        "@kit/empty-state"
+      ],
+      "files": [
+        {
+          "path": "app/(preview)/crm/layout.tsx",
+          "type": "registry:page",
+          "target": "app/crm/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/contacts/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/contacts/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/contacts/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/contacts/[id]/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/companies/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/companies/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/companies/[id]/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/companies/[id]/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/deals/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/deals/page.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/tasks/page.tsx",
+          "type": "registry:page",
+          "target": "app/crm/tasks/page.tsx"
+        },
+        {
+          "path": "components/crm/crm-shell.tsx",
+          "type": "registry:component",
+          "target": "components/crm/crm-shell.tsx"
+        },
+        {
+          "path": "components/crm/stage-badge.tsx",
+          "type": "registry:component",
+          "target": "components/crm/stage-badge.tsx"
+        },
+        {
+          "path": "components/crm/deals-chart.tsx",
+          "type": "registry:component",
+          "target": "components/crm/deals-chart.tsx"
+        },
+        {
+          "path": "components/crm/activity-timeline.tsx",
+          "type": "registry:component",
+          "target": "components/crm/activity-timeline.tsx"
+        },
+        {
+          "path": "components/crm/contacts-table.tsx",
+          "type": "registry:component",
+          "target": "components/crm/contacts-table.tsx"
+        },
+        {
+          "path": "components/crm/companies-table.tsx",
+          "type": "registry:component",
+          "target": "components/crm/companies-table.tsx"
+        },
+        {
+          "path": "components/crm/deals-board.tsx",
+          "type": "registry:component",
+          "target": "components/crm/deals-board.tsx"
+        },
+        {
+          "path": "components/crm/tasks-list.tsx",
+          "type": "registry:component",
+          "target": "components/crm/tasks-list.tsx"
+        },
+        {
+          "path": "lib/crm/types.ts",
+          "type": "registry:lib",
+          "target": "lib/crm/types.ts"
+        },
+        {
+          "path": "lib/crm/format.ts",
+          "type": "registry:lib",
+          "target": "lib/crm/format.ts"
+        },
+        {
+          "path": "lib/crm/fixtures.ts",
+          "type": "registry:lib",
+          "target": "lib/crm/fixtures.ts"
+        },
+        {
+          "path": "lib/crm/queries.ts",
+          "type": "registry:lib",
+          "target": "lib/crm/queries.ts"
+        }
+      ]
     }
   ]
 }

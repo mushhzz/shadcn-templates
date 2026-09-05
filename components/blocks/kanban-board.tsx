@@ -150,6 +150,8 @@ export function KanbanBoard({
   className,
 }: KanbanBoardProps) {
   const [activeId, setActiveId] = React.useState<string | null>(null)
+  // Stable id so dnd-kit's aria attributes match between server and client render.
+  const dndId = React.useId()
   const render = renderCard ?? ((c: KanbanCard) => <DefaultCard card={c} />)
   // Mouse drags start after a small move; touch needs a short hold so the
   // board can still be scrolled with a swipe on phones and tablets.
@@ -195,6 +197,7 @@ export function KanbanBoard({
 
   return (
     <DndContext
+      id={dndId}
       sensors={sensors}
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}

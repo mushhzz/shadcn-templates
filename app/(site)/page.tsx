@@ -36,7 +36,8 @@ const templates: Template[] = [
     name: "crm",
     title: "CRM",
     description: "Contacts, companies, deals pipeline and tasks.",
-    status: "coming soon",
+    status: "ready",
+    href: "/crm",
   },
   {
     name: "agent",
