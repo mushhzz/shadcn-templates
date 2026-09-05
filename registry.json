@@ -506,6 +506,102 @@
           "target": "lib/crm/queries.ts"
         }
       ]
+    },
+    {
+      "name": "chat",
+      "type": "registry:block",
+      "title": "Chat App",
+      "description": "Three-pane chat with conversation list, thread, contact panel, new conversation and group dialogs, contacts and settings.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "badge",
+        "avatar",
+        "input",
+        "label",
+        "select",
+        "switch",
+        "separator",
+        "scroll-area",
+        "checkbox",
+        "dialog",
+        "tabs",
+        "@kit/app-shell",
+        "@kit/page-header",
+        "@kit/message-list",
+        "@kit/composer",
+        "@kit/empty-state"
+      ],
+      "files": [
+        {
+          "path": "app/(preview)/chat/layout.tsx",
+          "type": "registry:page",
+          "target": "app/chat/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/page.tsx",
+          "type": "registry:page",
+          "target": "app/chat/page.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/contacts/page.tsx",
+          "type": "registry:page",
+          "target": "app/chat/contacts/page.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/chat/settings/page.tsx"
+        },
+        {
+          "path": "components/chat/chat-shell.tsx",
+          "type": "registry:component",
+          "target": "components/chat/chat-shell.tsx"
+        },
+        {
+          "path": "components/chat/presence-dot.tsx",
+          "type": "registry:component",
+          "target": "components/chat/presence-dot.tsx"
+        },
+        {
+          "path": "components/chat/new-conversation-dialog.tsx",
+          "type": "registry:component",
+          "target": "components/chat/new-conversation-dialog.tsx"
+        },
+        {
+          "path": "components/chat/chat-workspace.tsx",
+          "type": "registry:component",
+          "target": "components/chat/chat-workspace.tsx"
+        },
+        {
+          "path": "components/chat/contacts-grid.tsx",
+          "type": "registry:component",
+          "target": "components/chat/contacts-grid.tsx"
+        },
+        {
+          "path": "components/chat/chat-settings.tsx",
+          "type": "registry:component",
+          "target": "components/chat/chat-settings.tsx"
+        },
+        {
+          "path": "lib/chat/types.ts",
+          "type": "registry:lib",
+          "target": "lib/chat/types.ts"
+        },
+        {
+          "path": "lib/chat/fixtures.ts",
+          "type": "registry:lib",
+          "target": "lib/chat/fixtures.ts"
+        },
+        {
+          "path": "lib/chat/queries.ts",
+          "type": "registry:lib",
+          "target": "lib/chat/queries.ts"
+        }
+      ]
     }
   ]
 }

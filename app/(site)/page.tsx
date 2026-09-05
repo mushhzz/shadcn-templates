@@ -30,7 +30,8 @@ const templates: Template[] = [
     name: "chat",
     title: "Chat App",
     description: "Conversations, threads and contacts.",
-    status: "coming soon",
+    status: "ready",
+    href: "/chat",
   },
   {
     name: "crm",

@@ -93,7 +93,10 @@ export function MessageList({
             <div className={cn("flex max-w-[75%] flex-col gap-1", own ? "items-end" : "items-start")}>
               <div className="flex items-baseline gap-2 text-xs text-muted-foreground">
                 {!own ? <span className="font-medium text-foreground">{first.author.name}</span> : null}
-                <time dateTime={first.createdAt.toISOString()}>{timeFmt.format(first.createdAt)}</time>
+                {/* Server and browser time zones can differ; the client value wins. */}
+                <time dateTime={first.createdAt.toISOString()} suppressHydrationWarning>
+                  {timeFmt.format(first.createdAt)}
+                </time>
               </div>
               {group.map((m, i) => (
                 <div key={m.id} className={cn("flex flex-col gap-1", own ? "items-end" : "items-start")}>
