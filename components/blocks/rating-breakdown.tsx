@@ -16,7 +16,7 @@ export function RatingBreakdown({ title, description, counts, actions, className
   const total = counts.reduce((s, n) => s + n, 0)
   const average = total ? counts.reduce((s, n, i) => s + n * (5 - i), 0) / total : 0
   return (
-    <Card data-slot="rating-breakdown" className={className}>
+    <Card data-slot="rating-breakdown" className={cn("flex h-full flex-col", className)}>
       <CardHeader className="flex flex-row items-start justify-between gap-3">
         <div className="min-w-0 space-y-1">
           <CardTitle>{title}</CardTitle>
@@ -24,7 +24,7 @@ export function RatingBreakdown({ title, description, counts, actions, className
         </div>
         {actions}
       </CardHeader>
-      <CardContent className="flex flex-col gap-6 sm:flex-row sm:items-center">
+      <CardContent className="flex flex-1 flex-col justify-center gap-6 sm:flex-row sm:items-center">
         <div className="flex flex-col items-center gap-1 sm:w-32">
           <div className="flex" role="img" aria-label={`${average.toFixed(1)} out of 5`}>
             {[1, 2, 3, 4, 5].map((s) => (
@@ -36,7 +36,7 @@ export function RatingBreakdown({ title, description, counts, actions, className
             {total.toLocaleString("en-US")} review{total === 1 ? "" : "s"}
           </div>
         </div>
-        <div className="grid flex-1 gap-2">
+        <div className="grid flex-1 gap-3">
           {counts.map((n, i) => {
             const stars = 5 - i
             const pct = total ? (n / total) * 100 : 0

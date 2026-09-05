@@ -16,7 +16,7 @@ const ranges = [
   { value: "12m", label: "12m" },
 ]
 
-export function RevenueChart({ data }: { data: MonthlyMetric[] }) {
+export function RevenueChart({ data, className }: { data: MonthlyMetric[]; className?: string }) {
   const [range, setRange] = React.useState("12m")
   const n = range === "3m" ? 3 : range === "6m" ? 6 : 12
   const slice = data.slice(-n)
@@ -28,6 +28,7 @@ export function RevenueChart({ data }: { data: MonthlyMetric[] }) {
       range={range}
       onRangeChange={setRange}
       config={config}
+      className={className}
     >
       <AreaChart data={slice} margin={{ left: 0, right: 8 }}>
         <CartesianGrid vertical={false} />

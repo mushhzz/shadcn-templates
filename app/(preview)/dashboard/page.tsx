@@ -43,9 +43,9 @@ export default function OverviewPage() {
       </div>
       <div className="grid gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <RevenueChart data={getMonthly("12m")} />
+          <RevenueChart data={getMonthly("12m")} className="h-full" />
         </div>
-        <ActivityFeed items={getActivity()} />
+        <ActivityFeed items={getActivity()} limit={6} viewAllHref="/dashboard/orders" />
       </div>
       <div className="grid gap-4 xl:grid-cols-3">
         <DonutChart

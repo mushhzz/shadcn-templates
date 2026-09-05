@@ -31,7 +31,7 @@ export type ProgressListProps = {
 export function ProgressList({ title, description, items, max, formatValue = (n) => n.toLocaleString("en-US"), actions, className }: ProgressListProps) {
   const denominator = max ?? Math.max(...items.map((i) => i.value), 1)
   return (
-    <Card data-slot="progress-list" className={className}>
+    <Card data-slot="progress-list" className={cn("flex h-full flex-col", className)}>
       <CardHeader className="flex flex-row items-start justify-between gap-3">
         <div className="min-w-0 space-y-1">
           <CardTitle>{title}</CardTitle>

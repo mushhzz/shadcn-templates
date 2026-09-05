@@ -37,7 +37,7 @@ export function ChartCard({
 }: ChartCardProps) {
   const firstRange = ranges?.[0]
   return (
-    <Card data-slot="chart-card" className={className}>
+    <Card data-slot="chart-card" className={cn("flex flex-col", className)}>
       <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0 space-y-1">
           <CardTitle>{title}</CardTitle>
@@ -67,10 +67,11 @@ export function ChartCard({
           </div>
         ) : null}
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-1 flex-col">
+        {/* When the card is stretched by a grid row, the chart grows to fill it. */}
         <ChartContainer
           config={config}
-          className={cn("aspect-[16/10] w-full sm:aspect-[16/6]", chartClassName)}
+          className={cn("aspect-[16/10] w-full flex-1 sm:aspect-[16/6] sm:min-h-0", chartClassName)}
         >
           {children}
         </ChartContainer>
