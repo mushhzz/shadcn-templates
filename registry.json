@@ -315,7 +315,8 @@
         "@kit/highlight-card",
         "@kit/donut-chart",
         "@kit/rating-breakdown",
-        "@kit/progress-list"
+        "@kit/progress-list",
+        "@kit/error-page"
       ],
       "files": [
         {
@@ -327,6 +328,16 @@
           "path": "app/(preview)/dashboard/loading.tsx",
           "type": "registry:page",
           "target": "app/dashboard/loading.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/not-found.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/error.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/error.tsx"
         },
         {
           "path": "app/(preview)/dashboard/page.tsx",
@@ -481,7 +492,8 @@
         "@kit/command-palette",
         "@kit/notifications",
         "@kit/workspace-switcher",
-        "@kit/theme-customizer"
+        "@kit/theme-customizer",
+        "@kit/error-page"
       ],
       "files": [
         {
@@ -493,6 +505,16 @@
           "path": "app/(preview)/crm/loading.tsx",
           "type": "registry:page",
           "target": "app/crm/loading.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/crm/not-found.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/error.tsx",
+          "type": "registry:page",
+          "target": "app/crm/error.tsx"
         },
         {
           "path": "app/(preview)/crm/page.tsx",
@@ -625,7 +647,8 @@
         "@kit/command-palette",
         "@kit/notifications",
         "@kit/workspace-switcher",
-        "@kit/theme-customizer"
+        "@kit/theme-customizer",
+        "@kit/error-page"
       ],
       "files": [
         {
@@ -637,6 +660,16 @@
           "path": "app/(preview)/chat/loading.tsx",
           "type": "registry:page",
           "target": "app/chat/loading.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/chat/not-found.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/error.tsx",
+          "type": "registry:page",
+          "target": "app/chat/error.tsx"
         },
         {
           "path": "app/(preview)/chat/page.tsx",
@@ -738,7 +771,8 @@
         "@kit/command-palette",
         "@kit/notifications",
         "@kit/workspace-switcher",
-        "@kit/theme-customizer"
+        "@kit/theme-customizer",
+        "@kit/error-page"
       ],
       "files": [
         {
@@ -750,6 +784,16 @@
           "path": "app/(preview)/agent/loading.tsx",
           "type": "registry:page",
           "target": "app/agent/loading.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/agent/not-found.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/error.tsx",
+          "type": "registry:page",
+          "target": "app/agent/error.tsx"
         },
         {
           "path": "app/(preview)/agent/page.tsx",
@@ -1016,6 +1060,104 @@
           "path": "components/blocks/rating-breakdown.tsx",
           "type": "registry:component",
           "target": "components/blocks/rating-breakdown.tsx"
+        }
+      ]
+    },
+    {
+      "name": "error-page",
+      "type": "registry:block",
+      "title": "Error Page",
+      "description": "Centred state for 404, 500 and maintenance with code, icon, actions and collapsible technical detail.",
+      "files": [
+        {
+          "path": "components/blocks/error-page.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/error-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "auth-layout",
+      "type": "registry:block",
+      "title": "Auth Layout",
+      "description": "Two-column auth shell with brand, side panel, quote and footer.",
+      "files": [
+        {
+          "path": "components/blocks/auth-layout.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/auth-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "auth-forms",
+      "type": "registry:block",
+      "title": "Auth Forms",
+      "description": "Login, signup (with password strength) and forgot-password forms with validation, social buttons and busy/error states.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@kit/tokens",
+        "button",
+        "checkbox",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/auth-forms.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/auth-forms.tsx"
+        }
+      ]
+    },
+    {
+      "name": "auth-pages",
+      "type": "registry:block",
+      "title": "Auth Pages",
+      "description": "Ready-made /login, /signup, /forgot-password and /maintenance routes composed from auth-layout, auth-forms and error-page.",
+      "dependencies": [
+        "lucide-react",
+        "sonner"
+      ],
+      "registryDependencies": [
+        "sonner",
+        "button",
+        "@kit/auth-layout",
+        "@kit/auth-forms",
+        "@kit/error-page"
+      ],
+      "files": [
+        {
+          "path": "components/auth/auth-pages.tsx",
+          "type": "registry:component",
+          "target": "components/auth/auth-pages.tsx"
+        },
+        {
+          "path": "app/(auth)/login/page.tsx",
+          "type": "registry:page",
+          "target": "app/login/page.tsx"
+        },
+        {
+          "path": "app/(auth)/signup/page.tsx",
+          "type": "registry:page",
+          "target": "app/signup/page.tsx"
+        },
+        {
+          "path": "app/(auth)/forgot-password/page.tsx",
+          "type": "registry:page",
+          "target": "app/forgot-password/page.tsx"
+        },
+        {
+          "path": "app/(auth)/maintenance/page.tsx",
+          "type": "registry:page",
+          "target": "app/maintenance/page.tsx"
+        },
+        {
+          "path": "app/not-found.tsx",
+          "type": "registry:page",
+          "target": "app/not-found.tsx"
         }
       ]
     }

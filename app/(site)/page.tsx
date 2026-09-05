@@ -61,7 +61,7 @@ export default function HomePage() {
           once, then pull in a template or a single block.
         </p>
       </section>
-      <section className="grid gap-4 sm:grid-cols-2">
+      <section className="grid gap-4 sm:grid-cols-2" aria-label="Templates">
         {templates.map((t) => (
           <Card key={t.name}>
             <CardHeader>
@@ -81,6 +81,37 @@ export default function HomePage() {
             </CardContent>
           </Card>
         ))}
+      </section>
+      <section className="space-y-4" aria-label="Pages">
+        <div>
+          <h2 className="text-xl font-semibold tracking-tight">Pages</h2>
+          <p className="text-sm text-muted-foreground">Auth and error routes every app needs, installable as one item.</p>
+        </div>
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Auth &amp; error pages</CardTitle>
+              <Badge>ready</Badge>
+            </div>
+            <CardDescription>Login, signup, forgot password, maintenance and 404, on a two-column auth layout.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-3">
+            <InstallCommand item="auth-pages" />
+            <div className="flex flex-wrap gap-2">
+              {[
+                ["/login", "Login"],
+                ["/signup", "Signup"],
+                ["/forgot-password", "Forgot password"],
+                ["/maintenance", "Maintenance"],
+                ["/this-page-does-not-exist", "404"],
+              ].map(([href, label]) => (
+                <Button key={href} asChild variant="outline" size="sm">
+                  <Link href={href ?? "/"}>{label}</Link>
+                </Button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </section>
     </div>
   )
