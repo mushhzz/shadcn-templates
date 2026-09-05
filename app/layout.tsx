@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/blocks/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { ThemeSettingsLoader } from "@/components/blocks/theme-customizer"
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
+          <ThemeSettingsLoader />
           {children}
           <Toaster richColors position="bottom-right" />
         </ThemeProvider>

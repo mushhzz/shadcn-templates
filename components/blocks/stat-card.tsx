@@ -13,8 +13,8 @@ export type StatCardProps = {
   value: string
   delta?: number
   deltaLabel?: string
-  /** Optional icon shown top-right, like shadcn's dashboard cards. */
-  icon?: React.ComponentType<{ className?: string }>
+  /** Optional icon element shown top-right, e.g. `<DollarSign />`. An element (not a component) so server pages can pass it. */
+  icon?: React.ReactNode
   sparkline?: number[]
   sparklineType?: "line" | "bar"
   /** Where the sparkline sits: beside the value (default) or full-width below it. */
@@ -51,7 +51,7 @@ export function StatCard({
   value,
   delta,
   deltaLabel,
-  icon: Icon,
+  icon,
   sparkline,
   sparklineType = "line",
   layout = "inline",
@@ -65,7 +65,11 @@ export function StatCard({
     <Card data-slot="stat-card" className={cn("gap-2", className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-0">
         <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
-        {Icon ? <Icon className="size-4 text-muted-foreground" aria-hidden /> : null}
+        {icon ? (
+          <span className="text-muted-foreground [&>svg]:size-4" aria-hidden>
+            {icon}
+          </span>
+        ) : null}
       </CardHeader>
       <CardContent className={cn("flex gap-4", layout === "stacked" ? "flex-col" : "items-end justify-between")}>
         <div className="min-w-0">

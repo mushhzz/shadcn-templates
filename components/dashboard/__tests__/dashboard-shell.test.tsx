@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react"
 import { describe, expect, it, vi } from "vitest"
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/dashboard/customers" }))
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/dashboard/customers",
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), prefetch: vi.fn() }),
+}))
 
 import { DashboardShell, breadcrumbsFor } from "@/components/dashboard/dashboard-shell"
 import { ThemeProvider } from "@/components/blocks/theme-provider"

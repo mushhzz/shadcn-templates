@@ -307,7 +307,15 @@
         "@kit/data-table",
         "@kit/empty-state",
         "sonner",
-        "tooltip"
+        "tooltip",
+        "@kit/command-palette",
+        "@kit/notifications",
+        "@kit/workspace-switcher",
+        "@kit/theme-customizer",
+        "@kit/highlight-card",
+        "@kit/donut-chart",
+        "@kit/rating-breakdown",
+        "@kit/progress-list"
       ],
       "files": [
         {
@@ -469,7 +477,11 @@
         "@kit/empty-state",
         "toggle-group",
         "sonner",
-        "tooltip"
+        "tooltip",
+        "@kit/command-palette",
+        "@kit/notifications",
+        "@kit/workspace-switcher",
+        "@kit/theme-customizer"
       ],
       "files": [
         {
@@ -609,7 +621,11 @@
         "@kit/composer",
         "@kit/empty-state",
         "sonner",
-        "tooltip"
+        "tooltip",
+        "@kit/command-palette",
+        "@kit/notifications",
+        "@kit/workspace-switcher",
+        "@kit/theme-customizer"
       ],
       "files": [
         {
@@ -718,7 +734,11 @@
         "@kit/tool-call-card",
         "@kit/empty-state",
         "sonner",
-        "tooltip"
+        "tooltip",
+        "@kit/command-palette",
+        "@kit/notifications",
+        "@kit/workspace-switcher",
+        "@kit/theme-customizer"
       ],
       "files": [
         {
@@ -916,6 +936,86 @@
           "path": "components/blocks/theme-customizer.tsx",
           "type": "registry:component",
           "target": "components/blocks/theme-customizer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:block",
+      "title": "Donut Chart",
+      "description": "Donut with a centre total and a legend listing values and percentages.",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "card",
+        "chart"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/donut-chart.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/donut-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress-list",
+      "type": "registry:block",
+      "title": "Progress List",
+      "description": "Ranked list with proportional bars and optional delta badges, e.g. sales by region.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@kit/tokens",
+        "card",
+        "badge",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/progress-list.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/progress-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "highlight-card",
+      "type": "registry:block",
+      "title": "Highlight Card",
+      "description": "Hero card for a headline metric or moment, with value, delta, action and visual slot.",
+      "registryDependencies": [
+        "@kit/tokens",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/highlight-card.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/highlight-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rating-breakdown",
+      "type": "registry:block",
+      "title": "Rating Breakdown",
+      "description": "Average star rating with a per-star distribution.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@kit/tokens",
+        "card",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/rating-breakdown.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/rating-breakdown.tsx"
         }
       ]
     }

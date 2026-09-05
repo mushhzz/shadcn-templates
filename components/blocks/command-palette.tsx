@@ -4,6 +4,7 @@ import * as React from "react"
 import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -83,24 +84,26 @@ export function CommandPalette({
   }
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange} title="Command palette" description="Search pages and run actions">
-      <CommandInput placeholder={placeholder} />
-      <CommandList>
-        <CommandEmpty>{emptyMessage}</CommandEmpty>
-        {groups.map((g, i) => (
-          <React.Fragment key={g.heading}>
-            {i > 0 ? <CommandSeparator /> : null}
-            <CommandGroup heading={g.heading}>
-              {g.items.map((item) => (
-                <CommandItem key={item.id} value={`${item.label} ${item.keywords?.join(" ") ?? ""}`} onSelect={() => run(item.onSelect)}>
-                  {item.icon ? <item.icon className="size-4" /> : null}
-                  <span>{item.label}</span>
-                  {item.shortcut ? <CommandShortcut>{item.shortcut}</CommandShortcut> : null}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </React.Fragment>
-        ))}
-      </CommandList>
+      <Command>
+        <CommandInput placeholder={placeholder} />
+        <CommandList>
+          <CommandEmpty>{emptyMessage}</CommandEmpty>
+          {groups.map((g, i) => (
+            <React.Fragment key={g.heading}>
+              {i > 0 ? <CommandSeparator /> : null}
+              <CommandGroup heading={g.heading}>
+                {g.items.map((item) => (
+                  <CommandItem key={item.id} value={`${item.label} ${item.keywords?.join(" ") ?? ""}`} onSelect={() => run(item.onSelect)}>
+                    {item.icon ? <item.icon className="size-4" /> : null}
+                    <span>{item.label}</span>
+                    {item.shortcut ? <CommandShortcut>{item.shortcut}</CommandShortcut> : null}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </React.Fragment>
+          ))}
+        </CommandList>
+      </Command>
     </CommandDialog>
   )
 }

@@ -10,6 +10,8 @@ import { PageHeaderDemo } from "./_demos/page-header-demo"
 import { StatCardDemo } from "./_demos/stat-card-demo"
 import { ToolCallCardDemo } from "./_demos/tool-call-card-demo"
 import { SkeletonsDemo } from "./_demos/skeletons-demo"
+import { DonutChartDemo, HighlightCardDemo, ProgressListDemo, RatingBreakdownDemo } from "./_demos/widgets-demo"
+import { CommandPaletteDemo, NotificationsDemo, ThemeCustomizerDemo, WorkspaceSwitcherDemo } from "./_demos/shell-extras-demo"
 
 type Demo = { name: string; title: string; Demo: React.ComponentType; install?: boolean }
 const demos: Demo[] = [
@@ -17,7 +19,15 @@ const demos: Demo[] = [
   { name: "empty-state", title: "Empty State", Demo: EmptyStateDemo },
   { name: "stat-card", title: "Stat Card", Demo: StatCardDemo },
   { name: "chart-card", title: "Chart Card", Demo: ChartCardDemo },
+  { name: "donut-chart", title: "Donut Chart", Demo: DonutChartDemo },
+  { name: "progress-list", title: "Progress List", Demo: ProgressListDemo },
+  { name: "highlight-card", title: "Highlight Card", Demo: HighlightCardDemo },
+  { name: "rating-breakdown", title: "Rating Breakdown", Demo: RatingBreakdownDemo },
   { name: "app-shell", title: "App Shell", Demo: AppShellDemo },
+  { name: "command-palette", title: "Command Palette", Demo: CommandPaletteDemo },
+  { name: "notifications", title: "Notifications", Demo: NotificationsDemo },
+  { name: "workspace-switcher", title: "Workspace Switcher", Demo: WorkspaceSwitcherDemo },
+  { name: "theme-customizer", title: "Theme Customizer", Demo: ThemeCustomizerDemo },
   { name: "data-table", title: "Data Table", Demo: DataTableDemo },
   { name: "kanban-board", title: "Kanban Board", Demo: KanbanBoardDemo },
   { name: "message-list", title: "Message List", Demo: MessageListDemo },

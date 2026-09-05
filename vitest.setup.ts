@@ -22,6 +22,15 @@ if (!window.matchMedia) {
   })
 }
 
+// cmdk and Radix Select call these; jsdom does not implement them.
+if (!Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {}
+}
+if (!Element.prototype.hasPointerCapture) {
+  Element.prototype.hasPointerCapture = () => false
+  Element.prototype.releasePointerCapture = () => {}
+}
+
 // Recharts ResponsiveContainer reads ResizeObserver.
 class ResizeObserverMock {
   observe() {}
