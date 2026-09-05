@@ -327,6 +327,51 @@
           "path": "components/dashboard/top-products.tsx",
           "type": "registry:component",
           "target": "components/dashboard/top-products.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/customers/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/customers/page.tsx"
+        },
+        {
+          "path": "components/dashboard/customers-table.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/customers-table.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/orders/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/orders/page.tsx"
+        },
+        {
+          "path": "components/dashboard/orders-table.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/orders-table.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/settings/page.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/settings/page.tsx"
+        },
+        {
+          "path": "components/dashboard/settings-profile.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/settings-profile.tsx"
+        },
+        {
+          "path": "components/dashboard/settings-team.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/settings-team.tsx"
+        },
+        {
+          "path": "components/dashboard/settings-notifications.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/settings-notifications.tsx"
+        },
+        {
+          "path": "components/dashboard/settings-billing.tsx",
+          "type": "registry:component",
+          "target": "components/dashboard/settings-billing.tsx"
         }
       ]
     }
