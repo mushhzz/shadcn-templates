@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react"
-import { Line, LineChart } from "recharts"
+import { Bar, BarChart, Line, LineChart } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart"
+import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
 export type StatCardProps = {
@@ -12,7 +13,12 @@ export type StatCardProps = {
   value: string
   delta?: number
   deltaLabel?: string
+  /** Optional icon shown top-right, like shadcn's dashboard cards. */
+  icon?: React.ComponentType<{ className?: string }>
   sparkline?: number[]
+  sparklineType?: "line" | "bar"
+  /** Where the sparkline sits: beside the value (default) or full-width below it. */
+  layout?: "inline" | "stacked"
   className?: string
 }
 
@@ -21,57 +27,97 @@ export function formatDelta(delta: number): string {
   return `${sign}${Math.abs(delta).toFixed(1)}%`
 }
 
-const sparkConfig = { v: { label: "Value", color: "var(--chart-1)" } } satisfies ChartConfig
+const sparkConfig = { v: { label: "Value", color: "var(--chart-2)" } } satisfies ChartConfig
 
-export function StatCard({ label, value, delta, deltaLabel, sparkline, className }: StatCardProps) {
-  const trend =
-    delta === undefined ? undefined : delta > 0 ? "up" : delta < 0 ? "down" : "flat"
+function Sparkline({ data, type }: { data: number[]; type: "line" | "bar" }) {
+  const rows = data.map((v, i) => ({ i, v }))
+  return (
+    <ChartContainer config={sparkConfig} className="aspect-auto h-full w-full">
+      {type === "bar" ? (
+        <BarChart data={rows} margin={{ top: 2, bottom: 2, left: 0, right: 0 }} barCategoryGap={2} accessibilityLayer={false}>
+          <Bar dataKey="v" fill="var(--color-v)" radius={2} isAnimationActive={false} />
+        </BarChart>
+      ) : (
+        <LineChart data={rows} margin={{ top: 2, bottom: 2, left: 0, right: 0 }} accessibilityLayer={false}>
+          <Line type="monotone" dataKey="v" stroke="var(--color-v)" strokeWidth={2} dot={false} isAnimationActive={false} />
+        </LineChart>
+      )}
+    </ChartContainer>
+  )
+}
+
+export function StatCard({
+  label,
+  value,
+  delta,
+  deltaLabel,
+  icon: Icon,
+  sparkline,
+  sparklineType = "line",
+  layout = "inline",
+  className,
+}: StatCardProps) {
+  const trend = delta === undefined ? undefined : delta > 0 ? "up" : delta < 0 ? "down" : "flat"
   const TrendIcon = trend === "up" ? ArrowUpRight : trend === "down" ? ArrowDownRight : Minus
+  const hasSpark = !!sparkline && sparkline.length > 1
 
   return (
     <Card data-slot="stat-card" className={cn("gap-2", className)}>
-      <CardHeader className="pb-0">
+      <CardHeader className="flex flex-row items-center justify-between pb-0">
         <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
+        {Icon ? <Icon className="size-4 text-muted-foreground" aria-hidden /> : null}
       </CardHeader>
-      <CardContent className="flex items-end justify-between gap-4">
-        <div>
-          <div className="text-2xl font-semibold tabular-nums">{value}</div>
+      <CardContent className={cn("flex gap-4", layout === "stacked" ? "flex-col" : "items-end justify-between")}>
+        <div className="min-w-0">
+          <div className="truncate text-2xl font-semibold tabular-nums">{value}</div>
           {trend && delta !== undefined ? (
             <div
               data-testid="stat-card-delta"
               data-trend={trend}
               className={cn(
                 "mt-1 flex items-center gap-1 text-xs",
-                trend === "up" && "text-emerald-600 dark:text-emerald-400",
-                trend === "down" && "text-red-600 dark:text-red-400",
+                trend === "up" && "text-success",
+                trend === "down" && "text-destructive",
                 trend === "flat" && "text-muted-foreground",
               )}
             >
-              <TrendIcon className="size-3" />
-              <span>{formatDelta(delta)}</span>
+              <TrendIcon className="size-3" aria-hidden />
+              <span>
+                <span className="sr-only">{trend === "up" ? "Up " : trend === "down" ? "Down " : ""}</span>
+                {formatDelta(delta)}
+              </span>
               {deltaLabel ? <span className="text-muted-foreground">{deltaLabel}</span> : null}
             </div>
+          ) : deltaLabel ? (
+            <div className="mt-1 text-xs text-muted-foreground">{deltaLabel}</div>
           ) : null}
         </div>
-        {sparkline && sparkline.length > 1 ? (
-          <div data-testid="stat-card-sparkline" className="h-10 w-24">
-            <ChartContainer config={sparkConfig} className="aspect-auto h-full w-full">
-              <LineChart
-                data={sparkline.map((v, i) => ({ i, v }))}
-                margin={{ top: 2, bottom: 2, left: 0, right: 0 }}
-              >
-                <Line
-                  type="monotone"
-                  dataKey="v"
-                  stroke="var(--color-v)"
-                  strokeWidth={2}
-                  dot={false}
-                  isAnimationActive={false}
-                />
-              </LineChart>
-            </ChartContainer>
+        {hasSpark ? (
+          <div
+            data-testid="stat-card-sparkline"
+            className={cn(layout === "stacked" ? "h-12 w-full" : "h-10 w-24 shrink-0")}
+            aria-hidden
+          >
+            <Sparkline data={sparkline} type={sparklineType} />
           </div>
         ) : null}
+      </CardContent>
+    </Card>
+  )
+}
+
+export function StatCardSkeleton({ className }: { className?: string }) {
+  return (
+    <Card data-slot="stat-card-skeleton" className={cn("gap-2", className)} aria-busy>
+      <CardHeader className="pb-0">
+        <Skeleton className="h-4 w-24" />
+      </CardHeader>
+      <CardContent className="flex items-end justify-between gap-4">
+        <div className="space-y-2">
+          <Skeleton className="h-7 w-28" />
+          <Skeleton className="h-3 w-32" />
+        </div>
+        <Skeleton className="h-10 w-24" />
       </CardContent>
     </Card>
   )

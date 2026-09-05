@@ -70,7 +70,10 @@ export function AgentBuilder({ agent, tools, knowledge }: { agent: AgentRow; too
             <CardTitle>Instructions</CardTitle>
             <CardDescription>The system prompt the model sees on every run.</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="grid gap-2">
+            <Label htmlFor="agent-prompt" className="sr-only">
+              System prompt
+            </Label>
             <Textarea id="agent-prompt" rows={8} value={prompt} onChange={(e) => setPrompt(e.target.value)} className="font-mono text-xs leading-relaxed" />
           </CardContent>
         </Card>

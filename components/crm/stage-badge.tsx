@@ -4,11 +4,11 @@ import type { ContactStatus, DealStage, TaskPriority } from "@/lib/crm/types"
 
 const stageClass: Record<DealStage, string> = {
   lead: "bg-muted text-foreground",
-  qualified: "bg-sky-500/15 text-sky-700 dark:text-sky-300",
-  proposal: "bg-violet-500/15 text-violet-700 dark:text-violet-300",
-  negotiation: "bg-amber-500/15 text-amber-700 dark:text-amber-300",
-  won: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
-  lost: "bg-red-500/15 text-red-700 dark:text-red-300",
+  qualified: "bg-info/15 text-info",
+  proposal: "bg-primary/10 text-primary",
+  negotiation: "bg-warning/15 text-warning",
+  won: "bg-success/15 text-success",
+  lost: "bg-destructive/10 text-destructive",
 }
 
 export function StageBadge({ stage }: { stage: DealStage }) {
@@ -31,9 +31,9 @@ export function ContactStatusBadge({ status }: { status: ContactStatus }) {
 export function PriorityBadge({ priority }: { priority: TaskPriority }) {
   const cls =
     priority === "high"
-      ? "bg-red-500/15 text-red-700 dark:text-red-300"
+      ? "bg-destructive/10 text-destructive"
       : priority === "medium"
-        ? "bg-amber-500/15 text-amber-700 dark:text-amber-300"
+        ? "bg-warning/15 text-warning"
         : "bg-muted text-muted-foreground"
   return (
     <Badge variant="outline" className={cn("border-transparent capitalize", cls)}>

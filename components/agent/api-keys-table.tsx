@@ -128,7 +128,9 @@ export function ApiKeysTable({ keys: initial }: { keys: ApiKeyRow[] }) {
                 <TableHead>Scopes</TableHead>
                 <TableHead>Created</TableHead>
                 <TableHead>Last used</TableHead>
-                <TableHead className="w-16" />
+                <TableHead className="w-16">
+                  <span className="sr-only">Actions</span>
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

@@ -29,10 +29,17 @@ describe("ToolCallCard", () => {
 
   it("expands to show input and output", async () => {
     render(
-      <ToolCallCard name="search_web" status="error" input={{ q: "x" }} output={{ error: "boom" }} />,
+      <ToolCallCard name="search_web" status="success" input={{ q: "x" }} output={{ ok: true }} />,
     )
+    expect(screen.queryByText(/"q": "x"/)).toBeNull()
     await userEvent.click(screen.getByRole("button", { name: /search_web/ }))
     expect(screen.getByText(/"q": "x"/)).toBeInTheDocument()
-    expect(screen.getByText(/"error": "boom"/)).toBeInTheDocument()
+    expect(screen.getByText(/"ok": true/)).toBeInTheDocument()
+  })
+
+  it("opens by default on error and maps AI SDK states", () => {
+    render(<ToolCallCard name="send_email" state="output-error" input={{ to: "a" }} errorText="SMTP timeout" />)
+    expect(screen.getByTestId("tool-call-status")).toHaveAttribute("data-status", "error")
+    expect(screen.getByText("SMTP timeout")).toBeInTheDocument()
   })
 })

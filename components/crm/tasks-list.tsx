@@ -28,7 +28,7 @@ export function TasksList({ tasks: initial }: { tasks: TaskRow[] }) {
       {groups.map((g) => (
         <Card key={g.bucket}>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className={cn(g.bucket === "Overdue" && "text-red-600 dark:text-red-400")}>{g.bucket}</CardTitle>
+            <CardTitle className={cn(g.bucket === "Overdue" && "text-destructive")}>{g.bucket}</CardTitle>
             <Badge variant="secondary">{g.tasks.length}</Badge>
           </CardHeader>
           <CardContent className="grid gap-1">

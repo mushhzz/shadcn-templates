@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils"
 
 const dot: Record<StepStatus, string> = {
   pending: "bg-muted-foreground/40",
-  running: "bg-sky-500 animate-pulse",
-  success: "bg-emerald-500",
-  error: "bg-red-500",
+  running: "bg-info animate-pulse",
+  success: "bg-success",
+  error: "bg-destructive",
 }
 
 export function RunTimeline({ run }: { run: RunRow }) {
@@ -49,7 +49,7 @@ export function RunTimeline({ run }: { run: RunRow }) {
                     </span>
                   </div>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                    <div className={cn("h-full rounded-full", s.status === "error" ? "bg-red-500" : "bg-primary")} style={{ width: `${Math.max(2, (s.durationMs / total) * 100)}%` }} />
+                    <div className={cn("h-full rounded-full", s.status === "error" ? "bg-destructive" : "bg-primary")} style={{ width: `${Math.max(2, (s.durationMs / total) * 100)}%` }} />
                   </div>
                   {s.type === "tool" ? <ToolCallCard name={s.name} status={s.status} input={s.input} output={s.output} durationMs={s.durationMs || undefined} /> : null}
                 </li>

@@ -123,8 +123,9 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
 
   return (
     <div className="flex h-[calc(100svh-7.5rem)] min-h-[480px] overflow-hidden rounded-lg border bg-card">
+      <h1 className="sr-only">Chats</h1>
       {/* Conversation list */}
-      <aside className={cn("flex w-full shrink-0 flex-col border-r md:w-80", active && "hidden md:flex")}>
+      <aside aria-label="Conversations" className={cn("flex w-full shrink-0 flex-col border-r md:w-80", active && "hidden md:flex")}>
         <div className="flex items-center gap-2 p-3">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -219,7 +220,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
 
       {/* Details panel */}
       {active && showDetails ? (
-        <aside className="hidden w-72 shrink-0 flex-col border-l xl:flex">
+        <aside aria-label="Conversation details" className="hidden w-72 shrink-0 flex-col border-l xl:flex">
           <div className="flex flex-col items-center gap-2 p-6 text-center">
             <Avatar className="size-16">
               <AvatarFallback className={cn("text-lg", active.kind === "group" && "rounded-xl")}>{active.initials}</AvatarFallback>

@@ -1,8 +1,15 @@
+import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/blocks/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: { default: "Kit", template: "%s · Kit" },
+  description: "Application templates and blocks for shadcn/ui, installable with the shadcn CLI.",
+}
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
 
@@ -23,7 +30,10 @@ export default function RootLayout({
       className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster richColors position="bottom-right" />
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -1,40 +1,28 @@
 "use client"
 
 import * as React from "react"
+import { Copy, Eye, RefreshCcw } from "lucide-react"
+import { toast } from "sonner"
 import { Badge } from "@/components/ui/badge"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import {
   DataTable,
+  DataTableActionsColumn,
   DataTableColumnHeader,
   DataTableSelectColumn,
   createDataTableColumnHelper,
 } from "@/components/blocks/data-table"
 import { StatusBadge } from "@/components/dashboard/status-badge"
 import { formatCurrency, formatDate, formatRelative } from "@/lib/dashboard/format"
-import type { OrderRow, OrderStatus, Product } from "@/lib/dashboard/types"
+import type { OrderRow, Product } from "@/lib/dashboard/types"
 
 const h = createDataTableColumnHelper<OrderRow>()
 
 export function OrdersTable({ orders, products }: { orders: OrderRow[]; products: Product[] }) {
-  const [status, setStatus] = React.useState<OrderStatus | "all">("all")
   const [selected, setSelected] = React.useState<OrderRow | null>(null)
   const productById = React.useMemo(() => new Map(products.map((p) => [p.id, p])), [products])
-
-  const filtered = status === "all" ? orders : orders.filter((o) => o.status === status)
 
   const columns = React.useMemo(
     () =>
@@ -43,21 +31,16 @@ export function OrdersTable({ orders, products }: { orders: OrderRow[]; products
         h.accessor("id", {
           header: "Order",
           cell: ({ row }) => (
-            <button
-              type="button"
-              className="font-mono text-xs underline-offset-4 hover:underline"
-              onClick={() => setSelected(row.original)}
-            >
+            <button type="button" className="font-mono text-xs underline-offset-4 hover:underline" onClick={() => setSelected(row.original)}>
               {row.original.id}
             </button>
           ),
         }),
-        h.accessor("customerName", {
-          header: ({ column }) => <DataTableColumnHeader column={column} title="Customer" />,
-        }),
+        h.accessor("customerName", { header: ({ column }) => <DataTableColumnHeader column={column} title="Customer" /> }),
         h.accessor("status", {
           header: "Status",
           cell: ({ getValue }) => <StatusBadge status={getValue()} />,
+          filterFn: "arrIncludesSome",
         }),
         h.accessor("channel", {
           header: "Channel",
@@ -66,27 +49,26 @@ export function OrdersTable({ orders, products }: { orders: OrderRow[]; products
               {getValue()}
             </Badge>
           ),
+          filterFn: "arrIncludesSome",
         }),
         h.accessor("itemCount", {
-          header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Items" className="justify-end" />
-          ),
+          header: ({ column }) => <DataTableColumnHeader column={column} title="Items" className="justify-end" />,
           cell: ({ getValue }) => <div className="text-right tabular-nums">{getValue()}</div>,
         }),
         h.accessor("total", {
-          header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Total" className="justify-end" />
-          ),
-          cell: ({ getValue }) => (
-            <div className="text-right tabular-nums">{formatCurrency(getValue())}</div>
-          ),
+          header: ({ column }) => <DataTableColumnHeader column={column} title="Total" className="justify-end" />,
+          cell: ({ getValue }) => <div className="text-right tabular-nums">{formatCurrency(getValue())}</div>,
         }),
         h.accessor("createdAt", {
           header: ({ column }) => <DataTableColumnHeader column={column} title="Date" />,
-          cell: ({ getValue }) => (
-            <span className="text-muted-foreground">{formatDate(getValue())}</span>
-          ),
+          cell: ({ getValue }) => <span className="text-muted-foreground">{formatDate(getValue())}</span>,
+          sortFn: "datetime",
         }),
+        DataTableActionsColumn<OrderRow>((o) => [
+          { label: "View details", icon: Eye, onSelect: () => setSelected(o) },
+          { label: "Copy order ID", icon: Copy, onSelect: () => void navigator.clipboard?.writeText(o.id).then(() => toast("Copied")) },
+          { label: "Refund", icon: RefreshCcw, destructive: true, separator: true, onSelect: () => toast.error(`Refund started for ${o.id}`) },
+        ]),
       ]),
     [],
   )
@@ -95,23 +77,46 @@ export function OrdersTable({ orders, products }: { orders: OrderRow[]; products
     <>
       <DataTable
         columns={columns}
-        data={filtered}
+        data={orders}
         getRowId={(o) => o.id}
-        emptyMessage="No orders with this status."
-        toolbar={
-          <Select value={status} onValueChange={(v) => setStatus(v as OrderStatus | "all")}>
-            <SelectTrigger className="h-8 w-36" aria-label="Filter by status">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All statuses</SelectItem>
-              <SelectItem value="paid">Paid</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="refunded">Refunded</SelectItem>
-              <SelectItem value="failed">Failed</SelectItem>
-            </SelectContent>
-          </Select>
-        }
+        enableSearch
+        searchPlaceholder="Search orders…"
+        facets={[
+          {
+            column: "status",
+            title: "Status",
+            options: [
+              { value: "paid", label: "Paid" },
+              { value: "pending", label: "Pending" },
+              { value: "refunded", label: "Refunded" },
+              { value: "failed", label: "Failed" },
+            ],
+          },
+          {
+            column: "channel",
+            title: "Channel",
+            options: [
+              { value: "web", label: "Web" },
+              { value: "mobile", label: "Mobile" },
+              { value: "partner", label: "Partner" },
+            ],
+          },
+        ]}
+        exportFilename="orders.csv"
+        bulkActions={(rows, clear) => (
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-7"
+            onClick={() => {
+              toast(`Marked ${rows.length} orders as fulfilled`)
+              clear()
+            }}
+          >
+            Mark fulfilled
+          </Button>
+        )}
+        emptyMessage="No orders match your filters."
       />
       <Sheet open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
         <SheetContent className="sm:max-w-md">
@@ -137,12 +142,9 @@ export function OrdersTable({ orders, products }: { orders: OrderRow[]; products
                     return (
                       <div key={`${item.productId}-${i}`} className="flex items-center justify-between">
                         <span>
-                          {p?.name ?? item.productId}{" "}
-                          <span className="text-muted-foreground">× {item.quantity}</span>
+                          {p?.name ?? item.productId} <span className="text-muted-foreground">× {item.quantity}</span>
                         </span>
-                        <span className="tabular-nums">
-                          {formatCurrency((p?.price ?? 0) * item.quantity)}
-                        </span>
+                        <span className="tabular-nums">{formatCurrency((p?.price ?? 0) * item.quantity)}</span>
                       </div>
                     )
                   })}

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { DataTable, DataTableColumnHeader, createDataTableColumnHelper } from "@/components/blocks/data-table"
 import { KanbanBoard, type KanbanCard } from "@/components/blocks/kanban-board"
 import { StageBadge } from "@/components/crm/stage-badge"
@@ -72,16 +72,23 @@ export function DealsBoard({ deals: initial }: { deals: DealRow[] }) {
   return (
     <>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <Tabs value={view} onValueChange={(v) => setView(v as "board" | "list")}>
-          <TabsList>
-            <TabsTrigger value="board">
-              <KanbanSquare className="size-4" /> Board
-            </TabsTrigger>
-            <TabsTrigger value="list">
-              <List className="size-4" /> List
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          size="sm"
+          aria-label="View"
+          value={view}
+          onValueChange={(v) => {
+            if (v) setView(v as "board" | "list")
+          }}
+        >
+          <ToggleGroupItem value="board" aria-label="Board view">
+            <KanbanSquare className="size-4" /> Board
+          </ToggleGroupItem>
+          <ToggleGroupItem value="list" aria-label="List view">
+            <List className="size-4" /> List
+          </ToggleGroupItem>
+        </ToggleGroup>
         <div className="text-sm text-muted-foreground">
           {deals.filter((d) => !["won", "lost"].includes(d.stage)).length} open ·{" "}
           {formatCompactCurrency(deals.filter((d) => !["won", "lost"].includes(d.stage)).reduce((s, d) => s + d.value, 0))} in pipeline

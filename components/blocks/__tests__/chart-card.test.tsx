@@ -29,7 +29,7 @@ describe("ChartCard", () => {
     )
     expect(screen.getByText("Revenue")).toBeInTheDocument()
     expect(screen.getByText("Gross")).toBeInTheDocument()
-    await userEvent.click(screen.getByRole("tab", { name: "30 days" }))
+    await userEvent.click(screen.getByRole("radio", { name: "30 days" }))
     expect(onRangeChange).toHaveBeenCalledWith("30d")
   })
 
@@ -41,6 +41,6 @@ describe("ChartCard", () => {
         </BarChart>
       </ChartCard>,
     )
-    expect(screen.queryAllByRole("tab")).toHaveLength(0)
+    expect(screen.queryAllByRole("radio")).toHaveLength(0)
   })
 })

@@ -1,66 +1,37 @@
 "use client"
 
 import * as React from "react"
+import { Archive, Mail, Pencil, Trash2 } from "lucide-react"
+import { toast } from "sonner"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import {
   DataTable,
+  DataTableActionsColumn,
   DataTableColumnHeader,
+  DataTableSelectColumn,
   createDataTableColumnHelper,
 } from "@/components/blocks/data-table"
 import { StatusBadge } from "@/components/dashboard/status-badge"
 import { formatCurrency, formatDate, formatRelative } from "@/lib/dashboard/format"
-import type { CustomerRow, CustomerStatus, OrderRow } from "@/lib/dashboard/types"
+import type { CustomerRow, OrderRow } from "@/lib/dashboard/types"
 
 const h = createDataTableColumnHelper<CustomerRow>()
 
-export function CustomersTable({
-  customers,
-  orders,
-}: {
-  customers: CustomerRow[]
-  orders: OrderRow[]
-}) {
-  const [query, setQuery] = React.useState("")
-  const [status, setStatus] = React.useState<CustomerStatus | "all">("all")
+export function CustomersTable({ customers, orders }: { customers: CustomerRow[]; orders: OrderRow[] }) {
   const [selected, setSelected] = React.useState<CustomerRow | null>(null)
-
-  const filtered = React.useMemo(() => {
-    const q = query.trim().toLowerCase()
-    return customers.filter(
-      (c) =>
-        (status === "all" || c.status === status) &&
-        (q === "" || [c.name, c.email, c.company].some((v) => v.toLowerCase().includes(q))),
-    )
-  }, [customers, query, status])
 
   const columns = React.useMemo(
     () =>
       h.columns([
+        DataTableSelectColumn<CustomerRow>(),
         h.accessor("name", {
           header: ({ column }) => <DataTableColumnHeader column={column} title="Customer" />,
           cell: ({ row }) => (
-            <button
-              type="button"
-              className="flex items-center gap-3 text-left"
-              onClick={() => setSelected(row.original)}
-            >
+            <button type="button" className="flex items-center gap-3 text-left" onClick={() => setSelected(row.original)}>
               <Avatar className="size-8">
                 <AvatarFallback className="text-xs">{row.original.initials}</AvatarFallback>
               </Avatar>
@@ -71,37 +42,36 @@ export function CustomersTable({
             </button>
           ),
         }),
-        h.accessor("company", {
-          header: ({ column }) => <DataTableColumnHeader column={column} title="Company" />,
-        }),
+        h.accessor("company", { header: ({ column }) => <DataTableColumnHeader column={column} title="Company" /> }),
         h.accessor("status", {
           header: "Status",
           cell: ({ getValue }) => <StatusBadge status={getValue()} />,
+          filterFn: "arrIncludesSome",
         }),
         h.accessor("plan", {
           header: "Plan",
           cell: ({ getValue }) => <Badge variant="outline">{getValue()}</Badge>,
+          filterFn: "arrIncludesSome",
         }),
         h.accessor("orderCount", {
-          header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Orders" className="justify-end" />
-          ),
+          header: ({ column }) => <DataTableColumnHeader column={column} title="Orders" className="justify-end" />,
           cell: ({ getValue }) => <div className="text-right tabular-nums">{getValue()}</div>,
         }),
         h.accessor("lifetimeValue", {
-          header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Lifetime value" className="justify-end" />
-          ),
-          cell: ({ getValue }) => (
-            <div className="text-right tabular-nums">{formatCurrency(getValue())}</div>
-          ),
+          header: ({ column }) => <DataTableColumnHeader column={column} title="Lifetime value" className="justify-end" />,
+          cell: ({ getValue }) => <div className="text-right tabular-nums">{formatCurrency(getValue())}</div>,
         }),
         h.accessor("createdAt", {
-          header: "Joined",
-          cell: ({ getValue }) => (
-            <span className="text-muted-foreground">{formatDate(getValue())}</span>
-          ),
+          header: ({ column }) => <DataTableColumnHeader column={column} title="Joined" />,
+          cell: ({ getValue }) => <span className="text-muted-foreground">{formatDate(getValue())}</span>,
+          sortFn: "datetime",
         }),
+        DataTableActionsColumn<CustomerRow>((c) => [
+          { label: "View", icon: Pencil, onSelect: () => setSelected(c) },
+          { label: "Email", icon: Mail, onSelect: () => toast(`Email drafted to ${c.email}`) },
+          { label: "Archive", icon: Archive, onSelect: () => toast(`${c.name} archived`) },
+          { label: "Delete", icon: Trash2, destructive: true, separator: true, onSelect: () => toast.error(`${c.name} deleted`) },
+        ]),
       ]),
     [],
   )
@@ -112,30 +82,58 @@ export function CustomersTable({
     <>
       <DataTable
         columns={columns}
-        data={filtered}
+        data={customers}
         getRowId={(c) => c.id}
+        enableSearch
+        searchPlaceholder="Search customers…"
+        facets={[
+          {
+            column: "status",
+            title: "Status",
+            options: [
+              { value: "active", label: "Active" },
+              { value: "trial", label: "Trial" },
+              { value: "churned", label: "Churned" },
+            ],
+          },
+          {
+            column: "plan",
+            title: "Plan",
+            options: [
+              { value: "Free", label: "Free" },
+              { value: "Pro", label: "Pro" },
+              { value: "Team", label: "Team" },
+            ],
+          },
+        ]}
+        exportFilename="customers.csv"
+        bulkActions={(rows, clear) => (
+          <>
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-7"
+              onClick={() => {
+                toast(`Emailed ${rows.length} customers`)
+                clear()
+              }}
+            >
+              <Mail className="size-3.5" /> Email
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-7"
+              onClick={() => {
+                toast(`Archived ${rows.length} customers`)
+                clear()
+              }}
+            >
+              <Archive className="size-3.5" /> Archive
+            </Button>
+          </>
+        )}
         emptyMessage="No customers match your filters."
-        toolbar={
-          <div className="flex flex-1 flex-wrap items-center gap-2 sm:flex-initial">
-            <Input
-              placeholder="Search customers…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="h-8 w-full min-w-40 sm:w-64"
-            />
-            <Select value={status} onValueChange={(v) => setStatus(v as CustomerStatus | "all")}>
-              <SelectTrigger className="h-8 w-36" aria-label="Filter by status">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All statuses</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="trial">Trial</SelectItem>
-                <SelectItem value="churned">Churned</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        }
       />
       <Sheet open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
         <SheetContent className="sm:max-w-md">
@@ -166,10 +164,7 @@ export function CustomersTable({
                     <p className="text-muted-foreground">No orders yet.</p>
                   ) : (
                     customerOrders.slice(0, 6).map((o) => (
-                      <div
-                        key={o.id}
-                        className="flex items-center justify-between rounded-md border px-3 py-2"
-                      >
+                      <div key={o.id} className="flex items-center justify-between rounded-md border px-3 py-2">
                         <div className="grid">
                           <span className="font-mono text-xs">{o.id}</span>
                           <span className="text-xs text-muted-foreground" suppressHydrationWarning>

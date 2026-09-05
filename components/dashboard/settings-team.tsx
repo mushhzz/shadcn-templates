@@ -117,7 +117,9 @@ export function SettingsTeam({ members: initial }: { members: TeamMember[] }) {
             <TableRow>
               <TableHead>Member</TableHead>
               <TableHead>Role</TableHead>
-              <TableHead className="w-24" />
+              <TableHead className="w-24">
+                <span className="sr-only">Actions</span>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

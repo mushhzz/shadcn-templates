@@ -4,6 +4,39 @@
   "homepage": "https://shadcn-templates.vercel.app",
   "items": [
     {
+      "name": "tokens",
+      "type": "registry:theme",
+      "title": "Status tokens",
+      "description": "Semantic success, warning and info colours (AA contrast) exposed as Tailwind utilities: text-success, bg-warning/15, etc.",
+      "cssVars": {
+        "theme": {
+          "color-success": "var(--success)",
+          "color-success-foreground": "var(--success-foreground)",
+          "color-warning": "var(--warning)",
+          "color-warning-foreground": "var(--warning-foreground)",
+          "color-info": "var(--info)",
+          "color-info-foreground": "var(--info-foreground)"
+        },
+        "light": {
+          "success": "oklch(0.48 0.15 150)",
+          "success-foreground": "oklch(0.985 0 0)",
+          "warning": "oklch(0.5 0.16 49)",
+          "warning-foreground": "oklch(0.985 0 0)",
+          "info": "oklch(0.488 0.243 264.376)",
+          "info-foreground": "oklch(0.985 0 0)"
+        },
+        "dark": {
+          "success": "oklch(0.792 0.209 151.711)",
+          "success-foreground": "oklch(0.145 0 0)",
+          "warning": "oklch(0.828 0.189 84.429)",
+          "warning-foreground": "oklch(0.145 0 0)",
+          "info": "oklch(0.707 0.165 254.624)",
+          "info-foreground": "oklch(0.145 0 0)"
+        }
+      },
+      "files": []
+    },
+    {
       "name": "page-header",
       "type": "registry:block",
       "title": "Page Header",
@@ -42,8 +75,10 @@
         "recharts"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "card",
-        "chart"
+        "chart",
+        "skeleton"
       ],
       "files": [
         {
@@ -64,7 +99,9 @@
       "registryDependencies": [
         "card",
         "chart",
-        "tabs"
+        "tabs",
+        "toggle-group",
+        "skeleton"
       ],
       "files": [
         {
@@ -100,6 +137,7 @@
         "next-themes"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "sidebar",
         "breadcrumb",
         "button",
@@ -107,7 +145,8 @@
         "avatar",
         "separator",
         "tooltip",
-        "@kit/theme-provider"
+        "@kit/theme-provider",
+        "collapsible"
       ],
       "files": [
         {
@@ -130,7 +169,14 @@
         "table",
         "button",
         "checkbox",
-        "dropdown-menu"
+        "dropdown-menu",
+        "command",
+        "popover",
+        "select",
+        "separator",
+        "badge",
+        "input",
+        "skeleton"
       ],
       "files": [
         {
@@ -152,7 +198,9 @@
       ],
       "registryDependencies": [
         "card",
-        "badge"
+        "badge",
+        "button",
+        "skeleton"
       ],
       "files": [
         {
@@ -171,7 +219,10 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "avatar"
+        "avatar",
+        "button",
+        "tooltip",
+        "skeleton"
       ],
       "files": [
         {
@@ -191,7 +242,8 @@
       ],
       "registryDependencies": [
         "button",
-        "textarea"
+        "textarea",
+        "badge"
       ],
       "files": [
         {
@@ -210,6 +262,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "collapsible"
       ],
       "files": [
@@ -228,9 +281,11 @@
       "dependencies": [
         "lucide-react",
         "recharts",
-        "@tanstack/react-table"
+        "@tanstack/react-table",
+        "sonner"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "button",
         "card",
         "badge",
@@ -250,13 +305,20 @@
         "@kit/stat-card",
         "@kit/chart-card",
         "@kit/data-table",
-        "@kit/empty-state"
+        "@kit/empty-state",
+        "sonner",
+        "tooltip"
       ],
       "files": [
         {
           "path": "app/(preview)/dashboard/layout.tsx",
           "type": "registry:page",
           "target": "app/dashboard/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/dashboard/loading.tsx",
+          "type": "registry:page",
+          "target": "app/dashboard/loading.tsx"
         },
         {
           "path": "app/(preview)/dashboard/page.tsx",
@@ -383,9 +445,11 @@
       "dependencies": [
         "lucide-react",
         "recharts",
-        "@tanstack/react-table"
+        "@tanstack/react-table",
+        "sonner"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "button",
         "card",
         "badge",
@@ -402,13 +466,21 @@
         "@kit/chart-card",
         "@kit/data-table",
         "@kit/kanban-board",
-        "@kit/empty-state"
+        "@kit/empty-state",
+        "toggle-group",
+        "sonner",
+        "tooltip"
       ],
       "files": [
         {
           "path": "app/(preview)/crm/layout.tsx",
           "type": "registry:page",
           "target": "app/crm/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/crm/loading.tsx",
+          "type": "registry:page",
+          "target": "app/crm/loading.tsx"
         },
         {
           "path": "app/(preview)/crm/page.tsx",
@@ -513,9 +585,11 @@
       "title": "Chat App",
       "description": "Three-pane chat with conversation list, thread, contact panel, new conversation and group dialogs, contacts and settings.",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "sonner"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "button",
         "card",
         "badge",
@@ -533,13 +607,20 @@
         "@kit/page-header",
         "@kit/message-list",
         "@kit/composer",
-        "@kit/empty-state"
+        "@kit/empty-state",
+        "sonner",
+        "tooltip"
       ],
       "files": [
         {
           "path": "app/(preview)/chat/layout.tsx",
           "type": "registry:page",
           "target": "app/chat/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/chat/loading.tsx",
+          "type": "registry:page",
+          "target": "app/chat/loading.tsx"
         },
         {
           "path": "app/(preview)/chat/page.tsx",
@@ -611,9 +692,11 @@
       "dependencies": [
         "lucide-react",
         "recharts",
-        "@tanstack/react-table"
+        "@tanstack/react-table",
+        "sonner"
       ],
       "registryDependencies": [
+        "@kit/tokens",
         "button",
         "card",
         "badge",
@@ -633,13 +716,20 @@
         "@kit/message-list",
         "@kit/composer",
         "@kit/tool-call-card",
-        "@kit/empty-state"
+        "@kit/empty-state",
+        "sonner",
+        "tooltip"
       ],
       "files": [
         {
           "path": "app/(preview)/agent/layout.tsx",
           "type": "registry:page",
           "target": "app/agent/layout.tsx"
+        },
+        {
+          "path": "app/(preview)/agent/loading.tsx",
+          "type": "registry:page",
+          "target": "app/agent/loading.tsx"
         },
         {
           "path": "app/(preview)/agent/page.tsx",
@@ -740,6 +830,92 @@
           "path": "lib/agent/queries.ts",
           "type": "registry:lib",
           "target": "lib/agent/queries.ts"
+        }
+      ]
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:block",
+      "title": "Command Palette",
+      "description": "Cmd+K dialog with grouped commands, keywords and shortcuts, plus a header trigger button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "command",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/command-palette.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/command-palette.tsx"
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "type": "registry:block",
+      "title": "Notifications",
+      "description": "Bell button with unread indicator and a popover listing notifications with All/Unread tabs and mark-as-read.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@kit/tokens",
+        "button",
+        "popover",
+        "tabs",
+        "@kit/empty-state"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/notifications.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/notifications.tsx"
+        }
+      ]
+    },
+    {
+      "name": "workspace-switcher",
+      "type": "registry:block",
+      "title": "Workspace Switcher",
+      "description": "Sidebar-header dropdown to switch between workspaces or teams. Drops into the app-shell sidebarHeader slot.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "dropdown-menu",
+        "sidebar"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/workspace-switcher.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/workspace-switcher.tsx"
+        }
+      ]
+    },
+    {
+      "name": "theme-customizer",
+      "type": "registry:block",
+      "title": "Theme Customizer",
+      "description": "Popover with colour presets, radius and colour mode. Persists to localStorage and re-applies on load.",
+      "dependencies": [
+        "lucide-react",
+        "next-themes"
+      ],
+      "registryDependencies": [
+        "button",
+        "label",
+        "popover",
+        "toggle-group"
+      ],
+      "files": [
+        {
+          "path": "components/blocks/theme-customizer.tsx",
+          "type": "registry:component",
+          "target": "components/blocks/theme-customizer.tsx"
         }
       ]
     }
