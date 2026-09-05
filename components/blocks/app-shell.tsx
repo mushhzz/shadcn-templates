@@ -101,14 +101,16 @@ export function AppShell({
             <SidebarMenuItem>
               <SidebarMenuButton asChild size="lg">
                 <Link href={brand.href}>
-                  <div className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                  <div className="flex aspect-square size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
                     {BrandIcon ? (
                       <BrandIcon className="size-4" />
                     ) : (
                       <span className="text-sm font-bold">{brand.name[0]}</span>
                     )}
                   </div>
-                  <span className="font-semibold">{brand.name}</span>
+                  <div className="grid flex-1 text-left leading-tight">
+                    <span className="truncate font-semibold">{brand.name}</span>
+                  </div>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -149,7 +151,7 @@ export function AppShell({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton size="lg" aria-label={user.name}>
-                    <Avatar className="size-8 rounded-lg">
+                    <Avatar className="size-8 shrink-0 rounded-lg">
                       <AvatarFallback className="rounded-lg">{user.initials}</AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">

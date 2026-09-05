@@ -31,7 +31,7 @@ export function RevenueChart({ data }: { data: MonthlyMetric[] }) {
     >
       <AreaChart data={slice} margin={{ left: 0, right: 8 }}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="month" tickLine={false} axisLine={false} />
+        <XAxis dataKey="month" tickLine={false} axisLine={false} minTickGap={24} />
         <YAxis
           tickLine={false}
           axisLine={false}

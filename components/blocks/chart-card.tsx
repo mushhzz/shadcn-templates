@@ -40,8 +40,8 @@ export function ChartCard({
   const firstRange = ranges?.[0]
   return (
     <Card data-slot="chart-card" className={className}>
-      <CardHeader className="flex flex-row items-start justify-between gap-4">
-        <div className="space-y-1">
+      <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0 space-y-1">
           <CardTitle>{title}</CardTitle>
           {description ? <CardDescription>{description}</CardDescription> : null}
         </div>
@@ -58,7 +58,10 @@ export function ChartCard({
         ) : null}
       </CardHeader>
       <CardContent>
-        <ChartContainer config={config} className={cn("aspect-[16/6] w-full", chartClassName)}>
+        <ChartContainer
+          config={config}
+          className={cn("aspect-[16/10] w-full sm:aspect-[16/6]", chartClassName)}
+        >
           {children}
         </ChartContainer>
       </CardContent>

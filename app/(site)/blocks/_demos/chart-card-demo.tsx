@@ -32,7 +32,7 @@ export function ChartCardDemo() {
     >
       <BarChart data={data}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="month" tickLine={false} axisLine={false} />
+        <XAxis dataKey="month" tickLine={false} axisLine={false} minTickGap={24} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
       </BarChart>

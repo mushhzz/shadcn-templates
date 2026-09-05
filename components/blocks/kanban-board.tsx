@@ -5,7 +5,8 @@ import {
   DndContext,
   DragOverlay,
   KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   closestCorners,
   useDroppable,
   useSensor,
@@ -150,8 +151,11 @@ export function KanbanBoard({
 }: KanbanBoardProps) {
   const [activeId, setActiveId] = React.useState<string | null>(null)
   const render = renderCard ?? ((c: KanbanCard) => <DefaultCard card={c} />)
+  // Mouse drags start after a small move; touch needs a short hold so the
+  // board can still be scrolled with a swipe on phones and tablets.
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 4 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 6 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   )
 

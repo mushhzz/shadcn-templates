@@ -183,7 +183,7 @@ export function DataTable<TData extends RowData>({
 
   return (
     <div data-slot="data-table" className={cn("flex flex-col gap-3", className)}>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {toolbar}
         <div className="ml-auto">
           <DropdownMenu>
@@ -250,7 +250,7 @@ export function DataTable<TData extends RowData>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between gap-4 text-sm">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm">
         <div className="text-muted-foreground">
           {selectedCount > 0 ? `${selectedCount} selected` : `${data.length} rows`}
         </div>

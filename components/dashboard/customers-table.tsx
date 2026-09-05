@@ -116,12 +116,12 @@ export function CustomersTable({
         getRowId={(c) => c.id}
         emptyMessage="No customers match your filters."
         toolbar={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-1 flex-wrap items-center gap-2 sm:flex-initial">
             <Input
               placeholder="Search customers…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="h-8 w-64"
+              className="h-8 w-full min-w-40 sm:w-64"
             />
             <Select value={status} onValueChange={(v) => setStatus(v as CustomerStatus | "all")}>
               <SelectTrigger className="h-8 w-36" aria-label="Filter by status">

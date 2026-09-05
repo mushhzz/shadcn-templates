@@ -15,7 +15,7 @@ export function SignupsChart({ data }: { data: MonthlyMetric[] }) {
     <ChartCard title="Signups and orders" description="Monthly counts" config={config}>
       <LineChart data={data} margin={{ left: 0, right: 8 }}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="month" tickLine={false} axisLine={false} />
+        <XAxis dataKey="month" tickLine={false} axisLine={false} minTickGap={24} />
         <YAxis tickLine={false} axisLine={false} width={40} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <Line

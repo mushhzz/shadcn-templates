@@ -35,7 +35,7 @@ export function ChannelsChart({ data }: { data: MonthlyMetric[] }) {
     >
       <BarChart data={slice}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="month" tickLine={false} axisLine={false} />
+        <XAxis dataKey="month" tickLine={false} axisLine={false} minTickGap={24} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="web" stackId="a" fill="var(--color-web)" />
