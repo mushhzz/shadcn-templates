@@ -10,6 +10,7 @@ import { formatRelative } from "@/lib/crm/format"
 import { bucketTask, type TaskBucket } from "@/lib/crm/queries"
 import type { TaskRow } from "@/lib/crm/types"
 import { cn } from "@/lib/utils"
+import { emptyIllustration } from "@/lib/kit/assets"
 
 const order: TaskBucket[] = ["Overdue", "Today", "This week", "Later", "Done"]
 
@@ -20,7 +21,7 @@ export function TasksList({ tasks: initial }: { tasks: TaskRow[] }) {
     .filter((g) => g.tasks.length > 0)
 
   if (groups.length === 0) {
-    return <EmptyState title="All caught up" description="No tasks to show." />
+    return <EmptyState illustration={emptyIllustration("tasks")} title="All caught up" description="No tasks to show." />
   }
 
   return (

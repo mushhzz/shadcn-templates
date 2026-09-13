@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { EmptyState } from "@/components/blocks/empty-state"
 import { formatRelative } from "@/lib/crm/format"
 import type { ActivityType, TimelineItem } from "@/lib/crm/types"
+import { emptyIllustration } from "@/lib/kit/assets"
 
 const icons: Record<ActivityType, React.ComponentType<{ className?: string }>> = {
   note: MessageSquare,
@@ -28,7 +29,7 @@ export function ActivityTimeline({
       </CardHeader>
       <CardContent>
         {items.length === 0 ? (
-          <EmptyState title="No activity yet" description="Log a call, email or note to start the timeline." />
+          <EmptyState illustration={emptyIllustration("files")} title="No activity yet" description="Log a call, email or note to start the timeline." />
         ) : (
           <ol className="relative grid gap-5 border-l pl-6">
             {items.map((item) => {

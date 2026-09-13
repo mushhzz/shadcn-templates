@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { ArrowLeft, BellOff, Info, Pin, Plus, Search } from "lucide-react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { emptyIllustration, personAvatar } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -112,7 +113,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
     const author = userById.get(m.authorId)
     return {
       id: m.id,
-      author: { id: m.authorId, name: author?.name ?? "Unknown", initials: author?.initials ?? "?" },
+      author: { id: m.authorId, name: author?.name ?? "Unknown", initials: author?.initials ?? "?", avatar: author ? personAvatar(author.name) : undefined },
       body: m.body,
       createdAt: m.at,
       status: m.status,
@@ -149,6 +150,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
                 >
                   <div className="relative shrink-0">
                     <Avatar className="size-10">
+                      {c.kind === "dm" ? <AvatarImage src={personAvatar(c.participants.find((p) => p.id !== currentUser.id)?.name ?? "")} alt="" /> : null}
                       <AvatarFallback className={cn(c.kind === "group" && "rounded-lg")}>{c.initials}</AvatarFallback>
                     </Avatar>
                     {c.kind === "dm" ? (
@@ -189,6 +191,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
                 <ArrowLeft className="size-4" />
               </Button>
               <Avatar className="size-8">
+                {active.kind === "dm" ? <AvatarImage src={personAvatar(others[0]?.name ?? "")} alt="" /> : null}
                 <AvatarFallback className={cn("text-xs", active.kind === "group" && "rounded-lg")}>{active.initials}</AvatarFallback>
               </Avatar>
               <div className="grid min-w-0">
@@ -205,7 +208,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
               <MessageList
                 messages={messagesForList}
                 currentUserId={currentUser.id}
-                emptyState={<EmptyState title="Say hello" description="This is the beginning of your conversation." />}
+                emptyState={<EmptyState illustration={emptyIllustration("messages")} title="Say hello" description="This is the beginning of your conversation." />}
               />
               <div ref={bottomRef} />
             </div>
@@ -213,7 +216,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
           </>
         ) : (
           <div className="flex flex-1 items-center justify-center p-8">
-            <EmptyState title="No conversation selected" description="Pick a chat from the list or start a new one." action={<Button onClick={() => setDialogOpen(true)}>New conversation</Button>} />
+            <EmptyState illustration={emptyIllustration("messages")} title="No conversation selected" description="Pick a chat from the list or start a new one." action={<Button onClick={() => setDialogOpen(true)}>New conversation</Button>} />
           </div>
         )}
       </section>
@@ -223,6 +226,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
         <aside aria-label="Conversation details" className="hidden w-72 shrink-0 flex-col border-l xl:flex">
           <div className="flex flex-col items-center gap-2 p-6 text-center">
             <Avatar className="size-16">
+              {active.kind === "dm" ? <AvatarImage src={personAvatar(others[0]?.name ?? "")} alt="" /> : null}
               <AvatarFallback className={cn("text-lg", active.kind === "group" && "rounded-xl")}>{active.initials}</AvatarFallback>
             </Avatar>
             <div className="text-sm font-semibold">{active.title}</div>
@@ -237,6 +241,7 @@ export function ChatWorkspace({ currentUser, conversations: initialConversations
               <div key={p.id} className="flex items-center gap-2 rounded-md px-2 py-1.5">
                 <div className="relative">
                   <Avatar className="size-7">
+                    <AvatarImage src={personAvatar(p.name)} alt="" />
                     <AvatarFallback className="text-[10px]">{initialsOf(p.name)}</AvatarFallback>
                   </Avatar>
                   <PresenceDot presence={p.presence} className="absolute -bottom-0.5 -right-0.5 size-2" />

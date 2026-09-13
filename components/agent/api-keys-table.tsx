@@ -12,6 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { EmptyState } from "@/components/blocks/empty-state"
 import { formatRelative } from "@/lib/agent/queries"
 import type { ApiKeyRow } from "@/lib/agent/types"
+import { emptyIllustration } from "@/lib/kit/assets"
 
 const SCOPES = ["runs:read", "runs:write", "agents:read", "agents:write", "keys:read"]
 const dateFmt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
@@ -117,7 +118,7 @@ export function ApiKeysTable({ keys: initial }: { keys: ApiKeyRow[] }) {
       </div>
 
       {keys.length === 0 ? (
-        <EmptyState icon={KeyRound} title="No API keys" description="Create a key to call the API." />
+        <EmptyState illustration={emptyIllustration("files")} title="No API keys" description="Create a key to call the API." />
       ) : (
         <div className="overflow-hidden rounded-md border">
           <Table>

@@ -10,8 +10,9 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { cn } from "@/lib/utils"
 
 /* -------------------------------------------------------------------------------------------------
- * Presets: primary colour + chart palette per scheme. Values are oklch so they blend with shadcn's
- * default tokens. Only the variables listed here are overridden; everything else stays as-is.
+ * Presets. Each one sets the surface hue/tint (which every neutral token derives from in
+ * globals.css) plus the accent, ring and chart palette. Surfaces are tinted toward the accent so
+ * the whole page shifts, not just the buttons.
  * -----------------------------------------------------------------------------------------------*/
 
 type Vars = Record<string, string>
@@ -25,130 +26,132 @@ export type ThemePreset = {
   dark: Vars
 }
 
-const charts = (l: string[], d: string[]) => ({
-  light: Object.fromEntries(l.map((v, i) => [`chart-${i + 1}`, v])),
-  dark: Object.fromEntries(d.map((v, i) => [`chart-${i + 1}`, v])),
-})
+type PresetSpec = {
+  id: string
+  name: string
+  /** Surface hue (oklch) and how much chroma the neutrals carry. */
+  hue: number
+  tint: number
+  /** Accent [light, dark] as oklch strings. */
+  accent: [string, string]
+  accentForeground: [string, string]
+  /** Large-surface colour in dark mode; defaults to the light accent. */
+  brandDark?: string
+  charts: [string[], string[]]
+}
+
+function preset(spec: PresetSpec): ThemePreset {
+  const [aL, aD] = spec.accent
+  const [fL, fD] = spec.accentForeground
+  const base = { hue: String(spec.hue), tint: String(spec.tint) }
+  return {
+    id: spec.id,
+    name: spec.name,
+    swatch: aL,
+    light: {
+      ...base,
+      primary: aL,
+      "primary-foreground": fL,
+      brand: aL,
+      "brand-foreground": fL,
+      ring: aL.replace(")", " / 0.5)"),
+      "sidebar-primary": aL,
+      "sidebar-primary-foreground": fL,
+      ...Object.fromEntries(spec.charts[0].map((v, i) => [`chart-${i + 1}`, v])),
+    },
+    dark: {
+      ...base,
+      primary: aD,
+      "primary-foreground": fD,
+      brand: spec.brandDark ?? aL,
+      "brand-foreground": fL,
+      ring: aD.replace(")", " / 0.5)"),
+      "sidebar-primary": aD,
+      "sidebar-primary-foreground": fD,
+      ...Object.fromEntries(spec.charts[1].map((v, i) => [`chart-${i + 1}`, v])),
+    },
+  }
+}
 
 export const THEME_PRESETS: ThemePreset[] = [
-  {
-    id: "neutral",
-    name: "Neutral",
-    swatch: "oklch(0.205 0 0)",
-    light: {},
-    dark: {},
-  },
-  {
-    id: "blue",
-    name: "Blue",
-    swatch: "oklch(0.546 0.245 262.881)",
-    light: {
-      primary: "oklch(0.546 0.245 262.881)",
-      "primary-foreground": "oklch(0.97 0.014 254.604)",
-      ring: "oklch(0.746 0.16 232.661)",
-      "sidebar-primary": "oklch(0.546 0.245 262.881)",
-      "sidebar-primary-foreground": "oklch(0.97 0.014 254.604)",
-      ...charts(["oklch(0.546 0.245 262.881)", "oklch(0.707 0.165 254.624)", "oklch(0.809 0.105 251.813)", "oklch(0.882 0.059 254.128)", "oklch(0.932 0.032 255.585)"], []).light,
-    },
-    dark: {
-      primary: "oklch(0.707 0.165 254.624)",
-      "primary-foreground": "oklch(0.208 0.042 265.755)",
-      ring: "oklch(0.707 0.165 254.624)",
-      "sidebar-primary": "oklch(0.707 0.165 254.624)",
-      "sidebar-primary-foreground": "oklch(0.208 0.042 265.755)",
-      ...charts([], ["oklch(0.707 0.165 254.624)", "oklch(0.623 0.214 259.815)", "oklch(0.546 0.245 262.881)", "oklch(0.488 0.243 264.376)", "oklch(0.424 0.199 265.638)"]).dark,
-    },
-  },
-  {
+  preset({
+    id: "ink",
+    name: "Ink",
+    hue: 75,
+    tint: 0.008,
+    accent: ["oklch(0.31 0.045 265)", "oklch(0.86 0.04 265)"],
+    accentForeground: ["oklch(0.985 0.005 75)", "oklch(0.2 0.03 265)"],
+    charts: [
+      ["oklch(0.31 0.045 265)", "oklch(0.55 0.08 250)", "oklch(0.72 0.08 60)", "oklch(0.6 0.12 150)", "oklch(0.65 0.14 25)"],
+      ["oklch(0.86 0.04 265)", "oklch(0.65 0.1 250)", "oklch(0.78 0.1 60)", "oklch(0.7 0.14 150)", "oklch(0.72 0.15 25)"],
+    ],
+  }),
+  preset({
+    id: "ocean",
+    name: "Ocean",
+    hue: 240,
+    tint: 0.01,
+    accent: ["oklch(0.5 0.17 255)", "oklch(0.78 0.11 245)"],
+    accentForeground: ["oklch(0.985 0.01 250)", "oklch(0.2 0.05 255)"],
+    charts: [
+      ["oklch(0.5 0.17 255)", "oklch(0.66 0.13 230)", "oklch(0.78 0.09 200)", "oklch(0.7 0.1 70)", "oklch(0.6 0.16 25)"],
+      ["oklch(0.78 0.11 245)", "oklch(0.66 0.13 230)", "oklch(0.55 0.15 255)", "oklch(0.8 0.1 70)", "oklch(0.72 0.15 25)"],
+    ],
+  }),
+  preset({
     id: "violet",
     name: "Violet",
-    swatch: "oklch(0.541 0.281 293.009)",
-    light: {
-      primary: "oklch(0.541 0.281 293.009)",
-      "primary-foreground": "oklch(0.969 0.016 293.756)",
-      ring: "oklch(0.702 0.183 293.541)",
-      "sidebar-primary": "oklch(0.541 0.281 293.009)",
-      "sidebar-primary-foreground": "oklch(0.969 0.016 293.756)",
-      ...charts(["oklch(0.541 0.281 293.009)", "oklch(0.606 0.25 292.717)", "oklch(0.702 0.183 293.541)", "oklch(0.811 0.111 293.571)", "oklch(0.894 0.057 293.283)"], []).light,
-    },
-    dark: {
-      primary: "oklch(0.702 0.183 293.541)",
-      "primary-foreground": "oklch(0.283 0.141 291.089)",
-      ring: "oklch(0.702 0.183 293.541)",
-      "sidebar-primary": "oklch(0.702 0.183 293.541)",
-      "sidebar-primary-foreground": "oklch(0.283 0.141 291.089)",
-      ...charts([], ["oklch(0.702 0.183 293.541)", "oklch(0.606 0.25 292.717)", "oklch(0.541 0.281 293.009)", "oklch(0.491 0.27 292.581)", "oklch(0.432 0.232 292.759)"]).dark,
-    },
-  },
-  {
-    id: "emerald",
-    name: "Emerald",
-    swatch: "oklch(0.596 0.145 163.225)",
-    light: {
-      primary: "oklch(0.596 0.145 163.225)",
-      "primary-foreground": "oklch(0.979 0.021 166.113)",
-      ring: "oklch(0.765 0.177 163.223)",
-      "sidebar-primary": "oklch(0.596 0.145 163.225)",
-      "sidebar-primary-foreground": "oklch(0.979 0.021 166.113)",
-      ...charts(["oklch(0.596 0.145 163.225)", "oklch(0.696 0.17 162.48)", "oklch(0.765 0.177 163.223)", "oklch(0.845 0.143 164.978)", "oklch(0.905 0.093 164.15)"], []).light,
-    },
-    dark: {
-      primary: "oklch(0.696 0.17 162.48)",
-      "primary-foreground": "oklch(0.262 0.051 172.552)",
-      ring: "oklch(0.696 0.17 162.48)",
-      "sidebar-primary": "oklch(0.696 0.17 162.48)",
-      "sidebar-primary-foreground": "oklch(0.262 0.051 172.552)",
-      ...charts([], ["oklch(0.696 0.17 162.48)", "oklch(0.596 0.145 163.225)", "oklch(0.508 0.118 165.612)", "oklch(0.432 0.095 166.913)", "oklch(0.378 0.077 168.94)"]).dark,
-    },
-  },
-  {
-    id: "amber",
-    name: "Amber",
-    swatch: "oklch(0.666 0.179 58.318)",
-    light: {
-      primary: "oklch(0.666 0.179 58.318)",
-      "primary-foreground": "oklch(0.987 0.022 95.277)",
-      ring: "oklch(0.828 0.189 84.429)",
-      "sidebar-primary": "oklch(0.666 0.179 58.318)",
-      "sidebar-primary-foreground": "oklch(0.987 0.022 95.277)",
-      ...charts(["oklch(0.666 0.179 58.318)", "oklch(0.769 0.188 70.08)", "oklch(0.828 0.189 84.429)", "oklch(0.879 0.169 91.605)", "oklch(0.945 0.129 101.54)"], []).light,
-    },
-    dark: {
-      primary: "oklch(0.769 0.188 70.08)",
-      "primary-foreground": "oklch(0.279 0.077 45.635)",
-      ring: "oklch(0.769 0.188 70.08)",
-      "sidebar-primary": "oklch(0.769 0.188 70.08)",
-      "sidebar-primary-foreground": "oklch(0.279 0.077 45.635)",
-      ...charts([], ["oklch(0.769 0.188 70.08)", "oklch(0.666 0.179 58.318)", "oklch(0.555 0.163 48.998)", "oklch(0.473 0.137 46.201)", "oklch(0.414 0.112 45.904)"]).dark,
-    },
-  },
-  {
+    hue: 300,
+    tint: 0.01,
+    accent: ["oklch(0.5 0.2 295)", "oklch(0.8 0.1 295)"],
+    accentForeground: ["oklch(0.985 0.01 295)", "oklch(0.22 0.07 295)"],
+    charts: [
+      ["oklch(0.5 0.2 295)", "oklch(0.64 0.17 305)", "oklch(0.76 0.11 320)", "oklch(0.7 0.1 70)", "oklch(0.62 0.13 180)"],
+      ["oklch(0.8 0.1 295)", "oklch(0.68 0.16 305)", "oklch(0.56 0.2 295)", "oklch(0.8 0.1 70)", "oklch(0.72 0.12 180)"],
+    ],
+  }),
+  preset({
+    id: "moss",
+    name: "Moss",
+    hue: 140,
+    tint: 0.01,
+    accent: ["oklch(0.45 0.11 155)", "oklch(0.8 0.12 155)"],
+    accentForeground: ["oklch(0.985 0.01 155)", "oklch(0.2 0.04 155)"],
+    charts: [
+      ["oklch(0.45 0.11 155)", "oklch(0.62 0.13 145)", "oklch(0.76 0.1 120)", "oklch(0.7 0.1 70)", "oklch(0.55 0.12 250)"],
+      ["oklch(0.8 0.12 155)", "oklch(0.66 0.13 145)", "oklch(0.52 0.11 155)", "oklch(0.8 0.1 70)", "oklch(0.68 0.1 250)"],
+    ],
+  }),
+  preset({
+    id: "clay",
+    name: "Clay",
+    hue: 45,
+    tint: 0.014,
+    accent: ["oklch(0.55 0.15 45)", "oklch(0.8 0.12 60)"],
+    accentForeground: ["oklch(0.985 0.01 60)", "oklch(0.24 0.05 45)"],
+    charts: [
+      ["oklch(0.55 0.15 45)", "oklch(0.7 0.13 65)", "oklch(0.82 0.1 85)", "oklch(0.55 0.1 250)", "oklch(0.6 0.12 150)"],
+      ["oklch(0.8 0.12 60)", "oklch(0.7 0.13 55)", "oklch(0.6 0.14 45)", "oklch(0.68 0.1 250)", "oklch(0.72 0.12 150)"],
+    ],
+  }),
+  preset({
     id: "rose",
     name: "Rose",
-    swatch: "oklch(0.586 0.253 17.585)",
-    light: {
-      primary: "oklch(0.586 0.253 17.585)",
-      "primary-foreground": "oklch(0.969 0.015 12.422)",
-      ring: "oklch(0.712 0.194 13.428)",
-      "sidebar-primary": "oklch(0.586 0.253 17.585)",
-      "sidebar-primary-foreground": "oklch(0.969 0.015 12.422)",
-      ...charts(["oklch(0.586 0.253 17.585)", "oklch(0.645 0.246 16.439)", "oklch(0.712 0.194 13.428)", "oklch(0.81 0.117 11.638)", "oklch(0.892 0.058 10.001)"], []).light,
-    },
-    dark: {
-      primary: "oklch(0.712 0.194 13.428)",
-      "primary-foreground": "oklch(0.271 0.105 12.094)",
-      ring: "oklch(0.712 0.194 13.428)",
-      "sidebar-primary": "oklch(0.712 0.194 13.428)",
-      "sidebar-primary-foreground": "oklch(0.271 0.105 12.094)",
-      ...charts([], ["oklch(0.712 0.194 13.428)", "oklch(0.645 0.246 16.439)", "oklch(0.586 0.253 17.585)", "oklch(0.514 0.222 16.935)", "oklch(0.455 0.188 13.697)"]).dark,
-    },
-  },
+    hue: 10,
+    tint: 0.01,
+    accent: ["oklch(0.55 0.2 15)", "oklch(0.8 0.1 15)"],
+    accentForeground: ["oklch(0.985 0.01 15)", "oklch(0.24 0.06 15)"],
+    charts: [
+      ["oklch(0.55 0.2 15)", "oklch(0.68 0.16 20)", "oklch(0.8 0.1 30)", "oklch(0.55 0.1 250)", "oklch(0.6 0.12 150)"],
+      ["oklch(0.8 0.1 15)", "oklch(0.7 0.15 20)", "oklch(0.6 0.19 15)", "oklch(0.68 0.1 250)", "oklch(0.72 0.12 150)"],
+    ],
+  }),
 ]
 
 export const RADIUS_OPTIONS = [
   { id: "0", label: "0", value: "0rem" },
   { id: "sm", label: "S", value: "0.375rem" },
-  { id: "md", label: "M", value: "0.625rem" },
+  { id: "md", label: "M", value: "0.75rem" },
   { id: "lg", label: "L", value: "0.875rem" },
   { id: "xl", label: "XL", value: "1.25rem" },
 ] as const
@@ -156,8 +159,8 @@ export const RADIUS_OPTIONS = [
 export type ThemeSettings = { preset: string; radius: string }
 
 const STORAGE_KEY = "kit-theme"
-const DEFAULTS: ThemeSettings = { preset: "neutral", radius: "md" }
-const MANAGED_VARS = ["primary", "primary-foreground", "ring", "sidebar-primary", "sidebar-primary-foreground", "chart-1", "chart-2", "chart-3", "chart-4", "chart-5", "radius"]
+const DEFAULTS: ThemeSettings = { preset: "ink", radius: "md" }
+const MANAGED_VARS = ["hue", "tint", "primary", "primary-foreground", "brand", "brand-foreground", "ring", "sidebar-primary", "sidebar-primary-foreground", "chart-1", "chart-2", "chart-3", "chart-4", "chart-5", "radius"]
 
 function readSettings(): ThemeSettings {
   try {

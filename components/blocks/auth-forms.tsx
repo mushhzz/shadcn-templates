@@ -120,7 +120,7 @@ export function LoginForm({ onSubmit, onGoogle, onGithub, signupHref = "/signup"
   return (
     <form onSubmit={submit} noValidate className={cn("grid gap-6", className)} aria-busy={busy}>
       <div className="grid gap-1 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
         <p className="text-sm text-muted-foreground">Sign in to your account to continue.</p>
       </div>
       <SocialButtons onGoogle={onGoogle} onGithub={onGithub} disabled={busy} />

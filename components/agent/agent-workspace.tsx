@@ -13,6 +13,7 @@ import { ModelPicker } from "@/components/agent/model-picker"
 import { formatRelative, formatTokens, modelName } from "@/lib/agent/queries"
 import type { AgentMessage, AgentRow, ConversationRow, ModelId } from "@/lib/agent/types"
 import { cn } from "@/lib/utils"
+import { agentAvatar, emptyIllustration, personAvatar } from "@/lib/kit/assets"
 
 type Thread = AgentMessage & { at: Date }
 
@@ -23,7 +24,7 @@ export type AgentWorkspaceProps = {
   initialConversationId?: string
 }
 
-const USER = { id: "user", name: "You", initials: "YO" }
+const USER = { id: "user", name: "You", initials: "YO", avatar: personAvatar("Jane Doe") }
 
 export function AgentWorkspace({ agents, conversations: initialConversations, threads: initialThreads, initialConversationId }: AgentWorkspaceProps) {
   const [conversations, setConversations] = React.useState(initialConversations)
@@ -84,7 +85,7 @@ export function AgentWorkspace({ agents, conversations: initialConversations, th
     const calls = m.parts.filter((p) => p.type === "tool_call")
     return {
       id: m.id,
-      author: m.role === "user" ? USER : { id: "assistant", name: agent?.name ?? "Agent", initials: "AI" },
+      author: m.role === "user" ? USER : { id: "assistant", name: agent?.name ?? "Agent", initials: "AI", avatar: agent ? agentAvatar(agent.name) : undefined },
       body: texts.join("\n\n") || undefined,
       createdAt: m.at,
       attachments:
@@ -171,7 +172,7 @@ export function AgentWorkspace({ agents, conversations: initialConversations, th
           </>
         ) : (
           <div className="flex flex-1 items-center justify-center p-8">
-            <EmptyState icon={Bot} title="No conversation selected" description="Pick one from the list or start a new one." action={<Button onClick={newConversation}>New conversation</Button>} />
+            <EmptyState illustration={emptyIllustration("runs")} title="No conversation selected" description="Pick one from the list or start a new one." action={<Button onClick={newConversation}>New conversation</Button>} />
           </div>
         )}
       </section>

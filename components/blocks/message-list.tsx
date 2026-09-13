@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Check, CheckCheck } from "lucide-react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -36,9 +36,10 @@ export function Message({
   )
 }
 
-export function MessageAvatar({ initials, className, ...props }: React.ComponentProps<typeof Avatar> & { initials: string }) {
+export function MessageAvatar({ initials, src, className, ...props }: React.ComponentProps<typeof Avatar> & { initials: string; src?: string }) {
   return (
     <Avatar data-slot="message-avatar" className={cn("size-8 shrink-0", className)} {...props}>
+      {src ? <AvatarImage src={src} alt="" /> : null}
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>
   )
@@ -133,7 +134,7 @@ export function MessageAction({ label, children, ...props }: React.ComponentProp
  * Data-driven list
  * -----------------------------------------------------------------------------------------------*/
 
-export type MessageAuthor = { id: string; name: string; initials: string }
+export type MessageAuthor = { id: string; name: string; initials: string; avatar?: string }
 
 export type Message = {
   id: string
@@ -193,7 +194,7 @@ export function MessageList({
         const own = first.author.id === currentUserId
         return (
           <Message key={first.id} from={own ? "user" : "other"} variant={variant}>
-            <MessageAvatar initials={first.author.initials} />
+            <MessageAvatar initials={first.author.initials} src={first.author.avatar} />
             <MessageBody>
               <MessageMeta name={own ? undefined : first.author.name} at={first.createdAt} />
               {group.map((m, i) => (

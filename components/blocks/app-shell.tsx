@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { ChevronRight, ChevronsUpDown, LogOut, Moon, Search, Settings, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -59,7 +59,7 @@ export type NavGroup = { label?: string; items: NavItem[] }
 
 export type Breadcrumb = { label: string; href?: string }
 
-export type AppShellUser = { name: string; email: string; initials: string }
+export type AppShellUser = { name: string; email: string; initials: string; avatar?: string }
 
 export type AppShellProps = {
   brand: { name: string; href: string; icon?: React.ComponentType<{ className?: string }> }
@@ -219,6 +219,7 @@ export function AppShell({
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuButton size="lg" aria-label={`${user.name} account menu`}>
                       <Avatar className="size-8 shrink-0 rounded-lg">
+                        {user.avatar ? <AvatarImage src={user.avatar} alt="" className="rounded-lg" /> : null}
                         <AvatarFallback className="rounded-lg">{user.initials}</AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">

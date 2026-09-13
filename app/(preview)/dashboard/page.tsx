@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CreditCard, DollarSign, PartyPopper, Percent, ShoppingCart, Users } from "lucide-react"
+import { CreditCard, DollarSign, TrendingUp, Percent, ShoppingCart, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { DonutChart } from "@/components/blocks/donut-chart"
@@ -22,16 +22,16 @@ export default function OverviewPage() {
       <div className="grid gap-4 xl:grid-cols-3">
         <HighlightCard
           eyebrow="Best month so far"
-          title="Congratulations, Jane! 🎉"
+          title="Best month on record"
           description="Revenue beat target across every channel."
           value={formatCurrency(m.revenue)}
           delta={`+${m.revenueDelta.toFixed(1)}% from last month`}
           action={
-            <Button size="sm" asChild>
+            <Button size="sm" variant="secondary" asChild>
               <Link href="/dashboard/analytics">View analytics</Link>
             </Button>
           }
-          visual={<PartyPopper className="size-16" />}
+          visual={<TrendingUp className="size-16" />}
           tone="primary"
         />
         <div className="grid gap-4 sm:grid-cols-2 xl:col-span-2">

@@ -90,7 +90,7 @@ export function Notifications({ items, onMarkRead, onMarkAllRead, onOpen, classN
           <TabsContent value={tab} className="m-0">
             {list.length === 0 ? (
               <div className="p-4">
-                <EmptyState icon={Bell} title="You're all caught up" description="New notifications will show up here." className="border-0 p-6" />
+                <EmptyState illustration="/kit/empty/notifications.svg" title="You're all caught up" description="New notifications will show up here." className="border-0 p-6" />
               </div>
             ) : (
               <ul className="max-h-96 overflow-y-auto" aria-label="Notifications">

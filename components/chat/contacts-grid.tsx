@@ -3,7 +3,8 @@
 import * as React from "react"
 import Link from "next/link"
 import { MessageSquare, Search } from "lucide-react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { emptyIllustration, personAvatar } from "@/lib/kit/assets"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -35,7 +36,7 @@ export function ContactsGrid({ contacts }: { contacts: ChatUserRow[] }) {
         </ToggleGroup>
       </div>
       {filtered.length === 0 ? (
-        <EmptyState title="No people found" description="Try a different name or status." />
+        <EmptyState illustration={emptyIllustration("search")} title="No people found" description="Try a different name or status." />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {filtered.map((c) => (
@@ -43,6 +44,7 @@ export function ContactsGrid({ contacts }: { contacts: ChatUserRow[] }) {
               <CardContent className="flex items-center gap-3">
                 <div className="relative">
                   <Avatar className="size-11">
+                    <AvatarImage src={personAvatar(c.name)} alt="" />
                     <AvatarFallback>{c.initials}</AvatarFallback>
                   </Avatar>
                   <PresenceDot presence={c.presence} className="absolute -bottom-0.5 -right-0.5" />

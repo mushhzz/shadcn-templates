@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PageHeader } from "@/components/blocks/page-header"
@@ -41,6 +42,7 @@ export default async function CompanyDetailPage({ params }: { params: Promise<{ 
               <Link key={c.id} href={`/crm/contacts/${c.id}`} className="flex items-center justify-between gap-3 rounded-md border px-3 py-2 text-sm hover:bg-muted/60">
                 <div className="flex min-w-0 items-center gap-3">
                   <Avatar className="size-8">
+                    <AvatarImage src={personAvatar(c.name)} alt="" />
                     <AvatarFallback className="text-xs">{c.initials}</AvatarFallback>
                   </Avatar>
                   <div className="grid min-w-0">

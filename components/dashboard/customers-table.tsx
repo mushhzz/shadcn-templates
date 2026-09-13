@@ -3,7 +3,8 @@
 import * as React from "react"
 import { Archive, Mail, Pencil, Trash2 } from "lucide-react"
 import { toast } from "sonner"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -33,6 +34,7 @@ export function CustomersTable({ customers, orders }: { customers: CustomerRow[]
           cell: ({ row }) => (
             <button type="button" className="flex items-center gap-3 text-left" onClick={() => setSelected(row.original)}>
               <Avatar className="size-8">
+                <AvatarImage src={personAvatar(row.original.name)} alt="" />
                 <AvatarFallback className="text-xs">{row.original.initials}</AvatarFallback>
               </Avatar>
               <div className="grid">
@@ -142,6 +144,7 @@ export function CustomersTable({ customers, orders }: { customers: CustomerRow[]
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-3">
                   <Avatar className="size-10">
+                    <AvatarImage src={personAvatar(selected.name)} alt="" />
                     <AvatarFallback>{selected.initials}</AvatarFallback>
                   </Avatar>
                   {selected.name}

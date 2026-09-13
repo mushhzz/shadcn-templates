@@ -5,6 +5,7 @@ import { Shield, Zap } from "lucide-react"
 import { toast } from "sonner"
 import { AuthLayout } from "@/components/blocks/auth-layout"
 import { ForgotPasswordForm, LoginForm, SignupForm } from "@/components/blocks/auth-forms"
+import { KIT_ART } from "@/lib/kit/assets"
 
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -30,10 +31,10 @@ const footer = (
 function Aside() {
   return (
     <div className="grid gap-6">
-      <div className="flex items-center gap-2 text-lg font-semibold">
+      <div className="flex items-center gap-2 font-heading text-lg font-semibold">
         <Zap className="size-5" /> Acme
       </div>
-      <ul className="grid gap-3 text-sm text-muted-foreground">
+      <ul className="grid gap-3 text-sm text-brand-foreground/75">
         <li className="flex items-start gap-2">
           <Shield className="mt-0.5 size-4 shrink-0" /> SSO, SCIM and audit logs on every plan.
         </li>
@@ -47,7 +48,7 @@ function Aside() {
 
 export function LoginPage() {
   return (
-    <AuthLayout brand={brand} aside={<Aside />} quote={quote} footer={footer}>
+    <AuthLayout brand={brand} aside={<Aside />} quote={quote} footer={footer} art={KIT_ART.authPanel}>
       <LoginForm
         onSubmit={async ({ email }) => {
           await wait(900)
@@ -63,7 +64,7 @@ export function LoginPage() {
 
 export function SignupPage() {
   return (
-    <AuthLayout brand={brand} aside={<Aside />} quote={quote} footer={footer}>
+    <AuthLayout brand={brand} aside={<Aside />} quote={quote} footer={footer} art={KIT_ART.authPanel}>
       <SignupForm
         onSubmit={async ({ email }) => {
           await wait(900)
@@ -78,7 +79,7 @@ export function SignupPage() {
 
 export function ForgotPasswordPage() {
   return (
-    <AuthLayout brand={brand} aside={<Aside />} quote={quote}>
+    <AuthLayout brand={brand} aside={<Aside />} quote={quote} art={KIT_ART.authPanel}>
       <ForgotPasswordForm
         onSubmit={async () => {
           await wait(700)

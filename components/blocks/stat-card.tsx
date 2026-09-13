@@ -64,7 +64,7 @@ export function StatCard({
   return (
     <Card data-slot="stat-card" className={cn("gap-2", className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-0">
-        <CardTitle className="text-sm font-medium text-muted-foreground">{label}</CardTitle>
+        <CardTitle className="font-sans text-[13px] font-medium tracking-normal text-muted-foreground">{label}</CardTitle>
         {icon ? (
           <span className="text-muted-foreground [&>svg]:size-4" aria-hidden>
             {icon}
@@ -73,13 +73,13 @@ export function StatCard({
       </CardHeader>
       <CardContent className={cn("flex gap-4", layout === "stacked" ? "flex-col" : "items-end justify-between")}>
         <div className="min-w-0">
-          <div className="truncate text-2xl font-semibold tabular-nums">{value}</div>
+          <div className="truncate font-heading text-[28px] leading-none font-semibold tracking-tight tabular-nums">{value}</div>
           {trend && delta !== undefined ? (
             <div
               data-testid="stat-card-delta"
               data-trend={trend}
               className={cn(
-                "mt-1 flex items-center gap-1 text-xs",
+                "mt-2 flex items-center gap-1 text-xs",
                 trend === "up" && "text-success",
                 trend === "down" && "text-destructive",
                 trend === "flat" && "text-muted-foreground",

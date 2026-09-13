@@ -9,6 +9,7 @@ import { CommandPalette, CommandPaletteTrigger, useCommandPalette } from "@/comp
 import { Notifications, type Notification } from "@/components/blocks/notifications"
 import { ThemeCustomizer } from "@/components/blocks/theme-customizer"
 import { WorkspaceSwitcher } from "@/components/blocks/workspace-switcher"
+import { personAvatar } from "@/lib/kit/assets"
 
 const nav: NavGroup[] = [
   {
@@ -53,7 +54,7 @@ export function ChatShell({ children }: { children: React.ReactNode }) {
       <AppShell
         brand={{ name: "Soho", href: "/chat" }}
         nav={nav}
-        user={{ name: "Jane Doe", email: "jane@acme.com", initials: "JD" }}
+        user={{ name: "Jane Doe", email: "jane@acme.com", initials: "JD", avatar: personAvatar("Jane Doe") }}
         breadcrumbs={breadcrumbsFor(pathname)}
         currentPath={pathname}
         sidebarHeader={<WorkspaceSwitcher workspaces={workspaces} activeId={workspace} onChange={setWorkspace} />}

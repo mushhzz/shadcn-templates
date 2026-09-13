@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card"
 import { formatCurrency, formatNumber } from "@/lib/dashboard/format"
 import type { getTopProducts } from "@/lib/dashboard/queries"
+import { productImage } from "@/lib/kit/assets"
 
 export function TopProducts({ items }: { items: ReturnType<typeof getTopProducts> }) {
   const max = items[0]?.revenue ?? 1
@@ -22,6 +23,10 @@ export function TopProducts({ items }: { items: ReturnType<typeof getTopProducts
           <div key={product.id} className="grid gap-1.5">
             <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
+                {productImage(product.name) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={productImage(product.name)} alt="" className="size-6 rounded-md bg-muted" />
+                ) : null}
                 <span className="font-medium">{product.name}</span>
                 <Badge variant="outline">{product.category}</Badge>
               </div>

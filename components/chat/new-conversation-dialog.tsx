@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -69,6 +70,7 @@ export function NewConversationDialog({
                       aria-label={`Select ${c.name}`}
                     />
                     <Avatar className="size-7">
+                      <AvatarImage src={personAvatar(c.name)} alt="" />
                       <AvatarFallback className="text-[10px]">{c.initials}</AvatarFallback>
                     </Avatar>
                     <div className="grid min-w-0 text-sm">

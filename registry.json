@@ -37,6 +37,369 @@
       "files": []
     },
     {
+      "name": "kit-assets",
+      "type": "registry:block",
+      "title": "Kit assets",
+      "description": "Illustrated avatars, company marks, agent tiles, product icons, empty-state illustrations and brand art, all SVG in the kit palette, plus name-keyed lookup helpers.",
+      "files": [
+        {
+          "path": "lib/kit/assets.ts",
+          "type": "registry:lib",
+          "target": "lib/kit/assets.ts"
+        },
+        {
+          "path": "public/kit/agents/meeting-scheduler.svg",
+          "type": "registry:file",
+          "target": "public/kit/agents/meeting-scheduler.svg"
+        },
+        {
+          "path": "public/kit/agents/onboarding-guide.svg",
+          "type": "registry:file",
+          "target": "public/kit/agents/onboarding-guide.svg"
+        },
+        {
+          "path": "public/kit/agents/research-scout.svg",
+          "type": "registry:file",
+          "target": "public/kit/agents/research-scout.svg"
+        },
+        {
+          "path": "public/kit/agents/revenue-analyst.svg",
+          "type": "registry:file",
+          "target": "public/kit/agents/revenue-analyst.svg"
+        },
+        {
+          "path": "public/kit/agents/support-copilot.svg",
+          "type": "registry:file",
+          "target": "public/kit/agents/support-copilot.svg"
+        },
+        {
+          "path": "public/kit/art/auth-panel.svg",
+          "type": "registry:file",
+          "target": "public/kit/art/auth-panel.svg"
+        },
+        {
+          "path": "public/kit/art/hero.svg",
+          "type": "registry:file",
+          "target": "public/kit/art/hero.svg"
+        },
+        {
+          "path": "public/kit/avatars/a01.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a01.svg"
+        },
+        {
+          "path": "public/kit/avatars/a02.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a02.svg"
+        },
+        {
+          "path": "public/kit/avatars/a03.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a03.svg"
+        },
+        {
+          "path": "public/kit/avatars/a04.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a04.svg"
+        },
+        {
+          "path": "public/kit/avatars/a05.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a05.svg"
+        },
+        {
+          "path": "public/kit/avatars/a06.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a06.svg"
+        },
+        {
+          "path": "public/kit/avatars/a07.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a07.svg"
+        },
+        {
+          "path": "public/kit/avatars/a08.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a08.svg"
+        },
+        {
+          "path": "public/kit/avatars/a09.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a09.svg"
+        },
+        {
+          "path": "public/kit/avatars/a10.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a10.svg"
+        },
+        {
+          "path": "public/kit/avatars/a11.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a11.svg"
+        },
+        {
+          "path": "public/kit/avatars/a12.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a12.svg"
+        },
+        {
+          "path": "public/kit/avatars/a13.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a13.svg"
+        },
+        {
+          "path": "public/kit/avatars/a14.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a14.svg"
+        },
+        {
+          "path": "public/kit/avatars/a15.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a15.svg"
+        },
+        {
+          "path": "public/kit/avatars/a16.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a16.svg"
+        },
+        {
+          "path": "public/kit/avatars/a17.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a17.svg"
+        },
+        {
+          "path": "public/kit/avatars/a18.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a18.svg"
+        },
+        {
+          "path": "public/kit/avatars/a19.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a19.svg"
+        },
+        {
+          "path": "public/kit/avatars/a20.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a20.svg"
+        },
+        {
+          "path": "public/kit/avatars/a21.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a21.svg"
+        },
+        {
+          "path": "public/kit/avatars/a22.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a22.svg"
+        },
+        {
+          "path": "public/kit/avatars/a23.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a23.svg"
+        },
+        {
+          "path": "public/kit/avatars/a24.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a24.svg"
+        },
+        {
+          "path": "public/kit/avatars/a25.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a25.svg"
+        },
+        {
+          "path": "public/kit/avatars/a26.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a26.svg"
+        },
+        {
+          "path": "public/kit/avatars/a27.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a27.svg"
+        },
+        {
+          "path": "public/kit/avatars/a28.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a28.svg"
+        },
+        {
+          "path": "public/kit/avatars/a29.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a29.svg"
+        },
+        {
+          "path": "public/kit/avatars/a30.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a30.svg"
+        },
+        {
+          "path": "public/kit/avatars/a31.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a31.svg"
+        },
+        {
+          "path": "public/kit/avatars/a32.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a32.svg"
+        },
+        {
+          "path": "public/kit/avatars/a33.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a33.svg"
+        },
+        {
+          "path": "public/kit/avatars/a34.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a34.svg"
+        },
+        {
+          "path": "public/kit/avatars/a35.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a35.svg"
+        },
+        {
+          "path": "public/kit/avatars/a36.svg",
+          "type": "registry:file",
+          "target": "public/kit/avatars/a36.svg"
+        },
+        {
+          "path": "public/kit/empty/contacts.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/contacts.svg"
+        },
+        {
+          "path": "public/kit/empty/error.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/error.svg"
+        },
+        {
+          "path": "public/kit/empty/files.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/files.svg"
+        },
+        {
+          "path": "public/kit/empty/messages.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/messages.svg"
+        },
+        {
+          "path": "public/kit/empty/notifications.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/notifications.svg"
+        },
+        {
+          "path": "public/kit/empty/runs.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/runs.svg"
+        },
+        {
+          "path": "public/kit/empty/search.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/search.svg"
+        },
+        {
+          "path": "public/kit/empty/tasks.svg",
+          "type": "registry:file",
+          "target": "public/kit/empty/tasks.svg"
+        },
+        {
+          "path": "public/kit/logos/acme.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/acme.svg"
+        },
+        {
+          "path": "public/kit/logos/atlas-works.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/atlas-works.svg"
+        },
+        {
+          "path": "public/kit/logos/brightline.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/brightline.svg"
+        },
+        {
+          "path": "public/kit/logos/fern.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/fern.svg"
+        },
+        {
+          "path": "public/kit/logos/harbor.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/harbor.svg"
+        },
+        {
+          "path": "public/kit/logos/helio.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/helio.svg"
+        },
+        {
+          "path": "public/kit/logos/lumen.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/lumen.svg"
+        },
+        {
+          "path": "public/kit/logos/meridian-labs.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/meridian-labs.svg"
+        },
+        {
+          "path": "public/kit/logos/northwind.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/northwind.svg"
+        },
+        {
+          "path": "public/kit/logos/quill.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/quill.svg"
+        },
+        {
+          "path": "public/kit/logos/stratus.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/stratus.svg"
+        },
+        {
+          "path": "public/kit/logos/vetra.svg",
+          "type": "registry:file",
+          "target": "public/kit/logos/vetra.svg"
+        },
+        {
+          "path": "public/kit/products/api-overage.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/api-overage.svg"
+        },
+        {
+          "path": "public/kit/products/extra-seat.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/extra-seat.svg"
+        },
+        {
+          "path": "public/kit/products/onboarding-session.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/onboarding-session.svg"
+        },
+        {
+          "path": "public/kit/products/priority-support.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/priority-support.svg"
+        },
+        {
+          "path": "public/kit/products/pro-plan.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/pro-plan.svg"
+        },
+        {
+          "path": "public/kit/products/starter-plan.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/starter-plan.svg"
+        },
+        {
+          "path": "public/kit/products/team-plan.svg",
+          "type": "registry:file",
+          "target": "public/kit/products/team-plan.svg"
+        }
+      ]
+    },
+    {
       "name": "page-header",
       "type": "registry:block",
       "title": "Page Header",
@@ -316,7 +679,8 @@
         "@kit/donut-chart",
         "@kit/rating-breakdown",
         "@kit/progress-list",
-        "@kit/error-page"
+        "@kit/error-page",
+        "@kit/kit-assets"
       ],
       "files": [
         {
@@ -493,7 +857,8 @@
         "@kit/notifications",
         "@kit/workspace-switcher",
         "@kit/theme-customizer",
-        "@kit/error-page"
+        "@kit/error-page",
+        "@kit/kit-assets"
       ],
       "files": [
         {
@@ -648,7 +1013,8 @@
         "@kit/notifications",
         "@kit/workspace-switcher",
         "@kit/theme-customizer",
-        "@kit/error-page"
+        "@kit/error-page",
+        "@kit/kit-assets"
       ],
       "files": [
         {
@@ -772,7 +1138,8 @@
         "@kit/notifications",
         "@kit/workspace-switcher",
         "@kit/theme-customizer",
-        "@kit/error-page"
+        "@kit/error-page",
+        "@kit/kit-assets"
       ],
       "files": [
         {
@@ -930,7 +1297,8 @@
         "button",
         "popover",
         "tabs",
-        "@kit/empty-state"
+        "@kit/empty-state",
+        "@kit/kit-assets"
       ],
       "files": [
         {
@@ -1126,7 +1494,8 @@
         "button",
         "@kit/auth-layout",
         "@kit/auth-forms",
-        "@kit/error-page"
+        "@kit/error-page",
+        "@kit/kit-assets"
       ],
       "files": [
         {

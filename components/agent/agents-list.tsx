@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Bot } from "lucide-react"
+import { agentAvatar } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AgentStatusBadge } from "@/components/agent/status-badge"
@@ -15,9 +16,14 @@ export function AgentsList({ agents }: { agents: AgentRow[] }) {
             <CardHeader>
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
-                    <Bot className="size-4" />
-                  </span>
+                  {agentAvatar(a.name) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={agentAvatar(a.name)} alt="" className="size-8 rounded-md" />
+                  ) : (
+                    <span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
+                      <Bot className="size-4" />
+                    </span>
+                  )}
                   <CardTitle className="text-base">{a.name}</CardTitle>
                 </div>
                 <AgentStatusBadge status={a.status} />

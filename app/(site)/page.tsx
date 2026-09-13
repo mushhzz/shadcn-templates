@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { InstallCommand } from "@/components/site/install-command"
+import { KIT_ART } from "@/lib/kit/assets"
 
 type Template = {
   name: string
@@ -53,14 +54,17 @@ const templates: Template[] = [
 export default function HomePage() {
   return (
     <div className="space-y-10">
-      <section className="space-y-3">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Application templates for shadcn/ui
-        </h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Full app skeletons and reusable blocks you install with the shadcn CLI. Add the registry
-          once, then pull in a template or a single block.
-        </p>
+      <section className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr]">
+        <div className="space-y-4">
+          <h1 className="font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+            App templates that don&apos;t look like every other shadcn app
+          </h1>
+          <p className="max-w-xl text-lg text-muted-foreground">
+            Full application skeletons and reusable blocks, installed with the shadcn CLI. Add the
+            registry once, then pull in a template or a single block.
+          </p>
+        </div>
+        <Image src={KIT_ART.hero} alt="" width={1344} height={756} priority className="w-full rounded-xl shadow-card" />
       </section>
       <section className="grid gap-4 sm:grid-cols-2" aria-label="Templates">
         {templates.map((t) => (

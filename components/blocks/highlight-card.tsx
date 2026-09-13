@@ -15,14 +15,14 @@ export type HighlightCardProps = {
   className?: string
 }
 
-/** Hero-style card for a headline moment ("Congratulations, best month yet"). */
+/** Hero-style card for a headline moment ("Best month on record"). */
 export function HighlightCard({ eyebrow, title, description, value, delta, action, visual, tone = "default", className }: HighlightCardProps) {
   return (
     <Card
       data-slot="highlight-card"
       className={cn(
         "relative overflow-hidden",
-        tone === "primary" && "border-primary/30 bg-gradient-to-br from-primary/10 via-card to-card",
+        tone === "primary" && "bg-brand text-brand-foreground shadow-none [&_.text-muted-foreground]:text-brand-foreground/70 [&_.text-success]:text-brand-foreground",
         className,
       )}
     >
@@ -30,18 +30,18 @@ export function HighlightCard({ eyebrow, title, description, value, delta, actio
         <div className="grid min-w-0 gap-3">
           <div className="grid gap-1">
             {eyebrow ? <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{eyebrow}</span> : null}
-            <h3 className="text-lg font-semibold leading-tight">{title}</h3>
+            <h3 className="font-heading text-xl font-semibold leading-tight tracking-tight">{title}</h3>
             {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
           </div>
           {value ? (
             <div className="flex flex-wrap items-baseline gap-2">
-              <span className="text-3xl font-semibold tabular-nums">{value}</span>
+              <span className="font-heading text-4xl font-semibold tracking-tight tabular-nums">{value}</span>
               {delta ? <span className="text-xs text-success">{delta}</span> : null}
             </div>
           ) : null}
           {action ? <div>{action}</div> : null}
         </div>
-        {visual ? <div className="shrink-0 text-primary/80" aria-hidden>{visual}</div> : null}
+        {visual ? <div className="shrink-0 opacity-60" aria-hidden>{visual}</div> : null}
       </CardContent>
     </Card>
   )

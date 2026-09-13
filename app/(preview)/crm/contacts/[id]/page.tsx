@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Mail, Phone } from "lucide-react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -45,6 +46,7 @@ export default async function ContactDetailPage({ params }: { params: Promise<{ 
         <Card>
           <CardHeader className="flex flex-row items-center gap-3">
             <Avatar className="size-12">
+              <AvatarImage src={personAvatar(contact.name)} alt="" />
               <AvatarFallback>{contact.initials}</AvatarFallback>
             </Avatar>
             <div className="space-y-1">

@@ -4,7 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Eye, Mail, Phone, UserMinus } from "lucide-react"
 import { toast } from "sonner"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Button } from "@/components/ui/button"
 import {
   DataTable,
@@ -28,6 +29,7 @@ export function ContactsTable({ contacts, owners }: { contacts: ContactRow[]; ow
       cell: ({ row }) => (
         <Link href={`/crm/contacts/${row.original.id}`} className="flex items-center gap-3 hover:underline">
           <Avatar className="size-8">
+            <AvatarImage src={personAvatar(row.original.name)} alt="" />
             <AvatarFallback className="text-xs">{row.original.initials}</AvatarFallback>
           </Avatar>
           <div className="grid">

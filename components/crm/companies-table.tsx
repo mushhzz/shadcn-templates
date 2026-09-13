@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { companyLogo } from "@/lib/kit/assets"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { DataTable, DataTableColumnHeader, createDataTableColumnHelper } from "@/components/blocks/data-table"
@@ -16,6 +17,7 @@ const columns = h.columns([
     cell: ({ row }) => (
       <Link href={`/crm/companies/${row.original.id}`} className="flex items-center gap-3 hover:underline">
         <Avatar className="size-8 rounded-md">
+          <AvatarImage src={companyLogo(row.original.name)} alt="" className="rounded-md" />
           <AvatarFallback className="rounded-md text-xs">{row.original.initials}</AvatarFallback>
         </Avatar>
         <div className="grid">

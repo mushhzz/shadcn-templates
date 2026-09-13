@@ -59,7 +59,7 @@ export function HighlightCardDemo() {
     <div className="grid gap-4 md:grid-cols-2">
       <HighlightCard
         eyebrow="Best seller of the month"
-        title="Congratulations, Toby! 🎉"
+        title="Best quarter on record"
         value="$15,231.89"
         delta="+65% from last month"
         action={<Button size="sm">View sales</Button>}

@@ -55,13 +55,23 @@ describe("Notifications", () => {
 })
 
 describe("applyThemeSettings", () => {
-  it("sets preset variables on the root and clears them for the neutral preset", () => {
-    applyThemeSettings({ preset: "blue", radius: "xl" }, "light")
+  it("sets preset variables on the root and swaps them when the preset changes", () => {
+    applyThemeSettings({ preset: "ocean", radius: "xl" }, "light")
     const root = document.documentElement
-    expect(root.style.getPropertyValue("--primary")).toBe(THEME_PRESETS.find((p) => p.id === "blue")!.light.primary)
+    const ocean = THEME_PRESETS.find((p) => p.id === "ocean")!
+    expect(root.style.getPropertyValue("--primary")).toBe(ocean.light.primary)
+    expect(root.style.getPropertyValue("--hue")).toBe(ocean.light.hue)
     expect(root.style.getPropertyValue("--radius")).toBe("1.25rem")
-    applyThemeSettings({ preset: "neutral", radius: "md" }, "light")
-    expect(root.style.getPropertyValue("--primary")).toBe("")
+    applyThemeSettings({ preset: "ink", radius: "md" }, "light")
+    const ink = THEME_PRESETS.find((p) => p.id === "ink")!
+    expect(root.style.getPropertyValue("--primary")).toBe(ink.light.primary)
     expect(root.style.getPropertyValue("--radius")).toBe("")
+  })
+
+  it("keeps brand surfaces deep in dark mode", () => {
+    for (const p of THEME_PRESETS) {
+      const l = Number(/oklch\(([\d.]+)/.exec(p.dark.brand)![1])
+      expect(l, p.id).toBeLessThan(0.6)
+    }
   })
 })

@@ -19,6 +19,22 @@ Install a block or a template:
     npx shadcn@latest add @kit/app-shell
     npx shadcn@latest add @kit/dashboard
 
+## Design
+
+The kit ships its own design layer so installed apps do not look like default
+shadcn: Bricolage Grotesque for display, IBM Plex Sans for body, tinted paper
+surfaces with a designed dark mode, borderless cards on a single shadow ramp,
+six colour presets that retint the whole page, and a `brand` surface token for
+hero moments. The rules live in [DESIGN.md](DESIGN.md) and `pnpm qa` fails on
+the detectable "AI slop" patterns (forbidden fonts, gradients, coloured left
+borders, emoji in headings, bordered cards).
+
+Illustrated content is included as small SVGs under `public/kit/` and installs
+with `@kit/kit-assets`: 36 people avatars, 12 company marks, 5 agent tiles,
+7 product icons, 8 empty-state illustrations, a login panel and a hero. They
+are keyed by display name through `lib/kit/assets.ts`, so the same person gets
+the same face in every template.
+
 ## Blocks
 
 Every block ships with a skeleton, passes axe at AA, and works at 390px.
@@ -30,9 +46,9 @@ Every block ships with a skeleton, passes axe at AA, and works at 390px.
 | `command-palette` | ⌘K dialog with grouped commands, keywords, shortcuts |
 | `notifications` | Bell with unread indicator, All/Unread tabs, mark as read |
 | `workspace-switcher` | Team/workspace dropdown for the sidebar header |
-| `theme-customizer` | Colour presets, radius and mode; persisted per browser |
+| `theme-customizer` | Six surface-tinting presets, radius and mode; persisted per browser |
 | `page-header` | Title, description, actions slot |
-| `empty-state` | Icon, message, primary action |
+| `empty-state` | Illustration or icon, message, primary action |
 | `stat-card` | KPI with icon, delta, line or bar sparkline |
 | `chart-card` | Recharts wrapper with range toggle and actions slot |
 | `donut-chart` | Donut with centre total and legend |
@@ -44,7 +60,8 @@ Every block ships with a skeleton, passes axe at AA, and works at 390px.
 | `message-list` | Composable `Message*` primitives plus a grouped list with hover actions |
 | `composer` | Chat input with status-aware submit/stop, attachments, auto-resize |
 | `tool-call-card` | Collapsible tool call; accepts AI SDK tool states |
-| `auth-layout`, `auth-forms`, `auth-pages` | Two-column auth shell; login, signup, forgot password; ready routes |
+| `auth-layout`, `auth-forms`, `auth-pages` | Two-column auth shell with brand artwork; login, signup, forgot password; ready routes |
+| `kit-assets` | Avatars, logos, agent tiles, product icons, empty-state art and lookup helpers (SVG) |
 | `error-page` | 404 / 500 / maintenance state |
 
 ## Templates
@@ -82,6 +99,8 @@ support dark mode.
 - `registry.json` — every installable item
 - `components/blocks/` — shared block source (one file per block)
 - `components/ui/` — shadcn primitives, CLI-managed
+- `public/kit/` — illustrated assets; `lib/kit/assets.ts` maps names to files
+- `DESIGN.md` — type, colour, surface, motion and content rules
 - `app/(site)/` — gallery and block demos
 - `scripts/` — registry checker and smoke test
 

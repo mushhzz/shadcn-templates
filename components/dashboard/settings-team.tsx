@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -128,6 +129,7 @@ export function SettingsTeam({ members: initial }: { members: TeamMember[] }) {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar className="size-8">
+                      <AvatarImage src={personAvatar(m.name)} alt="" />
                       <AvatarFallback className="text-xs">{m.initials}</AvatarFallback>
                     </Avatar>
                     <div className="grid">

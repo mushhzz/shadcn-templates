@@ -1,7 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -28,6 +29,7 @@ export function ChatSettings({ user }: { user: ChatUserRow }) {
         >
           <CardHeader className="flex flex-row items-center gap-3">
             <Avatar className="size-12">
+              <AvatarImage src={personAvatar(user.name)} alt="" />
               <AvatarFallback>{user.initials}</AvatarFallback>
             </Avatar>
             <div className="space-y-1">

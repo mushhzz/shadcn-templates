@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { personAvatar } from "@/lib/kit/assets"
 import { cn } from "@/lib/utils"
 import {
   Card,
@@ -41,6 +42,7 @@ export function ActivityFeed({
         {shown.map((a) => (
           <div key={a.id} className="flex items-start gap-3">
             <Avatar className="size-8">
+              {a.actor !== "System" ? <AvatarImage src={personAvatar(a.actor)} alt="" /> : null}
               <AvatarFallback className="text-xs">
                 {a.actor === "System" ? "SY" : initialsOf(a.actor)}
               </AvatarFallback>

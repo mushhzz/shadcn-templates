@@ -1,6 +1,6 @@
 // Visual + accessibility QA against a running server.
 //
-//   pnpm qa                 # axe (serious/critical fail) + horizontal overflow at 390px on every route
+//   pnpm qa                 # axe (serious/critical fail) + horizontal overflow at 390px + DESIGN.md slop check on every route
 //   pnpm qa --shots         # also writes public/screenshots/<name>.png for the gallery
 //   BASE_URL=http://localhost:3000 pnpm qa
 //
@@ -42,6 +42,44 @@ for (const route of routes) {
     page.on("pageerror", (e) => errors.push(String(e).slice(0, 160)))
     await page.goto(BASE + route, { waitUntil: "networkidle" })
     await page.waitForTimeout(600)
+
+    // Anti-slop: the patterns from DESIGN.md that can be detected from computed styles.
+    const slop = await page.evaluate(() => {
+      const out = []
+      const bad = /inter|geist|space grotesk/i
+      const emoji = /\p{Extended_Pictographic}/u
+      const vis = (el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 }
+      const els = Array.from(document.querySelectorAll("body *")).filter(vis)
+      const fontHits = new Set()
+      for (const el of els) {
+        const cs = getComputedStyle(el)
+        if (bad.test(cs.fontFamily.split(",")[0])) fontHits.add(cs.fontFamily.split(",")[0].trim())
+        if (cs.backgroundImage.includes("gradient")) {
+          if (cs.webkitBackgroundClip === "text" || cs.backgroundClip === "text") out.push(`gradient text: ${el.tagName.toLowerCase()}`)
+          else if (el.getBoundingClientRect().width > 200) out.push(`gradient surface: ${el.tagName.toLowerCase()}.${String(el.className).slice(0, 40)}`)
+        }
+        const l = parseFloat(cs.borderLeftWidth), t = parseFloat(cs.borderTopWidth), r = parseFloat(cs.borderRightWidth), b = parseFloat(cs.borderBottomWidth)
+        if (l >= 2 && t === 0 && r === 0 && b === 0 && cs.borderLeftColor !== cs.color) out.push(`coloured left border: ${el.tagName.toLowerCase()}`)
+      }
+      for (const f of fontHits) out.push(`forbidden font: ${f}`)
+      for (const h of document.querySelectorAll("h1, h2, h3")) {
+        if (!vis(h)) continue
+        if (!/bricolage/i.test(getComputedStyle(h).fontFamily)) out.push(`heading not in display face: <${h.tagName.toLowerCase()}> ${h.textContent.trim().slice(0, 30)}`)
+      }
+      for (const el of document.querySelectorAll("h1, h2, h3, button, [data-slot=card-title]")) {
+        if (el.tagName === "BUTTON" && (el.textContent.trim().length > 30 || el.querySelector("[data-slot=avatar]"))) continue // rows with user content
+        if (vis(el) && emoji.test(el.textContent)) out.push(`emoji in ${el.tagName.toLowerCase()}: ${el.textContent.trim().slice(0, 30)}`)
+      }
+      for (const c of document.querySelectorAll("[data-slot=card]")) {
+        const cs = getComputedStyle(c)
+        if (vis(c) && parseFloat(cs.borderTopWidth) > 0 && cs.borderTopStyle !== "none") out.push(`card with border: ${c.className.slice(0, 40)}`)
+      }
+      return Array.from(new Set(out))
+    })
+    if (slop.length) {
+      failures++
+      console.log(`✖ ${route}@${w}: design slop\n    ${slop.join("\n    ")}`)
+    }
 
     const sw = await page.evaluate(() => document.documentElement.scrollWidth)
     if (sw > w + 1) {
